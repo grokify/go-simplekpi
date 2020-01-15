@@ -10,8 +10,8 @@ import (
 
 const baseUrlFormat string = `https://%s.simplekpi.com/api`
 
-func NewClient(site, username, password string) (*simplekpi.APIClient, error) {
-	headerVal, err := oauth2more.BasicAuthHeader(username, password)
+func NewClient(site, username, token string) (*simplekpi.APIClient, error) {
+	headerVal, err := oauth2more.BasicAuthHeader(username, token)
 	if err != nil {
 		return nil, err
 	}
@@ -30,9 +30,9 @@ func NewClient(site, username, password string) (*simplekpi.APIClient, error) {
 type Options struct {
 	Site     string `short:"s" long:"site" description:"Your site" required:"true"`
 	Username string `short:"u" long:"username" description:"Your username" required:"true"`
-	Password string `short:"p" long:"password" description:"Your password" required:"true"`
+	Token    string `short:"t" long:"token" description:"Your token" required:"true"`
 }
 
 func NewClientOptions(opts Options) (*simplekpi.APIClient, error) {
-	return NewClient(opts.Site, opts.Username, opts.Password)
+	return NewClient(opts.Site, opts.Username, opts.Token)
 }

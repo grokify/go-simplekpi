@@ -36,7 +36,7 @@ func main() {
 		}
 		opts.Site = os.Getenv("SIMPLEKPI_SITE")
 		opts.Username = os.Getenv("SIMPLEKPI_USERNAME")
-		opts.Password = os.Getenv("SIMPLEKPI_PASSWORD")
+		opts.Password = os.Getenv("SIMPLEKPI_TOKEN")
 	}
 
 	client, err := simplekpiutil.NewClient(opts.Site, opts.Username, opts.Password)
@@ -64,8 +64,8 @@ func main() {
 
 	if 1 == 0 {
 		test := simplekpi.KpiEntry{
-			KpiId:     92,
-			UserId:    122239,
+			KpiId:     111,
+			UserId:    222,
 			EntryDate: "2020-01-01",
 			Actual:    12345.0,
 		}
@@ -83,7 +83,7 @@ func main() {
 	}
 
 	if 1 == 0 {
-		kpientryid := int64(11044336)
+		kpientryid := int64(333)
 		resp, err := client.KPIEntriesApi.DeleteKPIEntry(
 			context.Background(),
 			kpientryid,

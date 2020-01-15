@@ -34,7 +34,7 @@ func main() {
 		}
 		opts.Site = os.Getenv("SIMPLEKPI_SITE")
 		opts.Username = os.Getenv("SIMPLEKPI_USERNAME")
-		opts.Password = os.Getenv("SIMPLEKPI_PASSWORD")
+		opts.Password = os.Getenv("SIMPLEKPI_TOKEN")
 	}
 
 	client, err := simplekpiutil.NewClient(opts.Site, opts.Username, opts.Password)
