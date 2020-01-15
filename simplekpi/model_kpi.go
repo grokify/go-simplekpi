@@ -10,19 +10,33 @@
 package simplekpi
 
 type Kpi struct {
-	AggregateFunction string  `json:"aggregate_function,omitempty"`
-	CategoryId        int64   `json:"category_id,omitempty"`
-	CreatedAt         string  `json:"created_at,omitempty"`
-	Description       string  `json:"description,omitempty"`
-	FrequencyId       string  `json:"frequency_id,omitempty"`
-	IconId            int64   `json:"icon_id,omitempty"`
-	Id                int64   `json:"id,omitempty"`
-	IsActive          bool    `json:"is_active,omitempty"`
-	IsCalculated      bool    `json:"is_calculated,omitempty"`
-	Name              string  `json:"name,omitempty"`
-	SortOrder         int32   `json:"sort_order,omitempty"`
-	TargetDefault     float32 `json:"target_default,omitempty"`
-	UnitId            int64   `json:"unit_id,omitempty"`
-	UpdatedAt         string  `json:"updated_at,omitempty"`
-	ValueDirection    string  `json:"value_direction,omitempty"`
+	// The aggregate function determines how the KPI is calculated and can be either AVG (Average) or SUM (Total Sum)
+	AggregateFunction string `json:"aggregate_function"`
+	// The id of the category the KPI is in
+	CategoryId int64 `json:"category_id"`
+	// The UTC date and time the KPI was created. Date time format without timezone, e.g. `2019-01-01T00:00:00`
+	CreatedAt string `json:"created_at,omitempty"`
+	// The description of the KPI
+	Description string `json:"description,omitempty"`
+	FrequencyId string `json:"frequency_id"`
+	// The id of the icon to assign to the KPI
+	IconId int64 `json:"icon_id"`
+	// Automatically generated for the KPI
+	Id int64 `json:"id,omitempty"`
+	// Active KPIs can have date entered against them otherwise they are display only KPIs
+	IsActive bool `json:"is_active"`
+	// Calculated KPIs cannot be amended via the API and must be added / amended in the interface
+	IsCalculated bool `json:"is_calculated,omitempty"`
+	// The name of the KPI
+	Name string `json:"name"`
+	// The display order of the KPI
+	SortOrder int32 `json:"sort_order"`
+	// The default target value for the KPI. If left blank or null the KPI will not have a target
+	TargetDefault float32 `json:"target_default,omitempty"`
+	// The id of the unit of measure to assign to the KPI
+	UnitId int64 `json:"unit_id"`
+	// The UTC date and time the KPI was updated. Date time format without timezone, e.g. `2019-01-01T00:00:00`
+	UpdatedAt string `json:"updated_at,omitempty"`
+	// The value direction is case sensitive and can only be U(p), D(own) and N(one)
+	ValueDirection string `json:"value_direction"`
 }

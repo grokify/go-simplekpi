@@ -251,39 +251,72 @@ components:
         is_calculated: true
       properties:
         aggregate_function:
+          description: The aggregate function determines how the KPI is calculated
+            and can be either AVG (Average) or SUM (Total Sum)
           type: string
         category_id:
+          description: The id of the category the KPI is in
           format: int64
           type: integer
         created_at:
+          description: The UTC date and time the KPI was created. Date time format
+            without timezone, e.g. `2019-01-01T00:00:00`
           type: string
         description:
+          description: The description of the KPI
+          maxLength: 150
           type: string
         frequency_id:
           type: string
         icon_id:
+          description: The id of the icon to assign to the KPI
           format: int64
           type: integer
         id:
+          description: Automatically generated for the KPI
           format: int64
           type: integer
         is_active:
+          description: Active KPIs can have date entered against them otherwise they
+            are display only KPIs
           type: boolean
         is_calculated:
+          description: Calculated KPIs cannot be amended via the API and must be added
+            / amended in the interface
           type: boolean
         name:
+          description: The name of the KPI
+          maxLength: 100
           type: string
         sort_order:
+          description: The display order of the KPI
           type: integer
         target_default:
+          description: The default target value for the KPI. If left blank or null
+            the KPI will not have a target
           type: number
         unit_id:
+          description: The id of the unit of measure to assign to the KPI
           format: int64
           type: integer
         updated_at:
+          description: The UTC date and time the KPI was updated. Date time format
+            without timezone, e.g. `2019-01-01T00:00:00`
           type: string
         value_direction:
+          description: The value direction is case sensitive and can only be U(p),
+            D(own) and N(one)
           type: string
+      required:
+      - aggregate_function
+      - category_id
+      - frequency_id
+      - icon_id
+      - is_active
+      - name
+      - sort_order
+      - unit_id
+      - value_direction
     KPIEntry:
       example:
         actual: 0.8008281904610115

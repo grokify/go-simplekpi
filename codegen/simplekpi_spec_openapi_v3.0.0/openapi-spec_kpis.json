@@ -57,22 +57,23 @@
       },
       "schemas":{
         "KPI":{
+          "required":["category_id","icon_id","unit_id","frequency_id","name","value_direction","aggregate_function","sort_order","is_active"],
           "properties":{
-            "id":{"type":"integer","format":"int64"},
-            "category_id":{"type":"integer","format":"int64"},
-            "icon_id":{"type":"integer","format":"int64"},
-            "unit_id":{"type":"integer","format":"int64"},
+            "id":{"type":"integer","format":"int64","description":"Automatically generated for the KPI"},
+            "category_id":{"type":"integer","format":"int64","description":"The id of the category the KPI is in"},
+            "icon_id":{"type":"integer","format":"int64","description":"The id of the icon to assign to the KPI"},
+            "unit_id":{"type":"integer","format":"int64","description":"The id of the unit of measure to assign to the KPI"},
             "frequency_id":{"type":"string"},
-            "name":{"type":"string"},
-            "description":{"type":"string"},
-            "target_default":{"type":"number"},
-            "value_direction":{"type":"string"},
-            "aggregate_function":{"type":"string"},
-            "sort_order":{"type":"integer"},
-            "is_active":{"type":"boolean"},
-            "is_calculated":{"type":"boolean"},
-            "created_at":{"type":"string"},
-            "updated_at":{"type":"string"}
+            "name":{"type":"string","description":"The name of the KPI","maxLength":100},
+            "description":{"type":"string","description":"The description of the KPI","maxLength":150},
+            "target_default":{"type":"number","description":"The default target value for the KPI. If left blank or null the KPI will not have a target"},
+            "value_direction":{"type":"string","description":"The value direction is case sensitive and can only be U(p), D(own) and N(one)"},
+            "aggregate_function":{"type":"string","description":"The aggregate function determines how the KPI is calculated and can be either AVG (Average) or SUM (Total Sum)"},
+            "sort_order":{"type":"integer","description":"The display order of the KPI"},
+            "is_active":{"type":"boolean","description":"Active KPIs can have date entered against them otherwise they are display only KPIs"},
+            "is_calculated":{"type":"boolean","description":"Calculated KPIs cannot be amended via the API and must be added / amended in the interface"},
+            "created_at":{"type":"string","description":"The UTC date and time the KPI was created. Date time format without timezone, e.g. `2019-01-01T00:00:00`"},
+            "updated_at":{"type":"string","description":"The UTC date and time the KPI was updated. Date time format without timezone, e.g. `2019-01-01T00:00:00`"}
           }
         }
       }
