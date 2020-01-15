@@ -1,0 +1,388 @@
+openapi: 3.0.0
+info:
+  termsOfService: https://www.simplekpi.com/Company/Terms
+  title: SimpleKPI API
+  version: "1.0"
+servers:
+- url: https://YOURDOMAIN.simplekpi.com/api
+security:
+- basicAuth: []
+tags:
+- name: Entries
+- name: KPI Entries
+- name: KPIs
+- name: Users
+paths:
+  /kpientries:
+    get:
+      description: The KPI entries are filtered based on the search query string.
+        All the search criteria is optional and we will return a maximum of 500 entries
+        per page. If the result set has the amount of rows you set `&rows=100`, it's
+        your responsibility to check the next page to see if there are any more --
+        you do this by adding &page=2 to the query, then &page=3 and so on.
+      operationId: getAllKPIEntries
+      parameters:
+      - explode: true
+        in: query
+        name: dateFrom
+        required: true
+        schema:
+          format: date
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: dateTo
+        required: true
+        schema:
+          format: date
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: userid
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: kpiid
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: rows
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/KPIEntry'
+                type: array
+          description: Success
+      summary: Get all KPI Entries
+      tags:
+      - KPI Entries
+    post:
+      description: The KPI entries are filtered based on the search query string.
+        All the search criteria is optional and we will return a maximum of 500 entries
+        per page. If the result set has the amount of rows you set `&rows=100`, it's
+        your responsibility to check the next page to see if there are any more --
+        you do this by adding &page=2 to the query, then &page=3 and so on.
+      operationId: addKPIEntry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KPIEntry'
+        description: KPI Entry Object
+        required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KPIEntry'
+          description: Success
+      summary: Add KPI Entry
+      tags:
+      - KPI Entries
+  /kpientries/{kpientryid}:
+    delete:
+      operationId: deleteKPIEntry
+      parameters:
+      - explode: false
+        in: path
+        name: kpientryid
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        200:
+          content: {}
+          description: Success
+      summary: Delete KPI Entry
+      tags:
+      - KPI Entries
+    get:
+      operationId: getKPIEntry
+      parameters:
+      - explode: false
+        in: path
+        name: kpientryid
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KPIEntry'
+          description: Success
+      summary: Get KPI Entry
+      tags:
+      - KPI Entries
+    put:
+      operationId: updateKPIEntry
+      parameters:
+      - explode: false
+        in: path
+        name: kpientryid
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KPIEntry'
+        description: KPI Entry Object
+        required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KPIEntry'
+          description: Success
+      summary: Update KPI Entry
+      tags:
+      - KPI Entries
+  /kpis:
+    get:
+      description: Returns data on all KPIs. There are no parameters for this API.
+      operationId: getAllKPIs
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/KPI'
+                type: array
+          description: Success
+      summary: Get all KPIs
+      tags:
+      - KPIs
+  /users:
+    get:
+      description: Returns data on all users. There are no parameters for this API.
+      operationId: getAllUsers
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: Success
+      summary: Get all Users
+      tags:
+      - Users
+components:
+  schemas:
+    Entry:
+      properties:
+        actual:
+          format: double
+          type: number
+        created_at:
+          format: date-time
+          type: string
+        entry_date:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        kpi_id:
+          format: int64
+          type: integer
+        notes:
+          type: string
+        target:
+          format: double
+          type: number
+        updated_at:
+          format: date-time
+          type: string
+        user_id:
+          format: int64
+          type: integer
+    KPI:
+      example:
+        aggregate_function: aggregate_function
+        is_active: true
+        created_at: created_at
+        description: description
+        icon_id: 6
+        value_direction: value_direction
+        target_default: 5.637376656633329
+        frequency_id: frequency_id
+        category_id: 0
+        updated_at: updated_at
+        name: name
+        id: 1
+        sort_order: 5
+        unit_id: 2
+        is_calculated: true
+      properties:
+        aggregate_function:
+          type: string
+        category_id:
+          format: int64
+          type: integer
+        created_at:
+          type: string
+        description:
+          type: string
+        frequency_id:
+          type: string
+        icon_id:
+          format: int64
+          type: integer
+        id:
+          format: int64
+          type: integer
+        is_active:
+          type: boolean
+        is_calculated:
+          type: boolean
+        name:
+          type: string
+        sort_order:
+          type: integer
+        target_default:
+          type: number
+        unit_id:
+          format: int64
+          type: integer
+        updated_at:
+          type: string
+        value_direction:
+          type: string
+    KPIEntry:
+      example:
+        actual: 0.8008281904610115
+        notes: notes
+        updated_at: updated_at
+        user_id: 5
+        kpi_id: 1
+        created_at: created_at
+        id: 6
+        entry_date: entry_date
+        target: 5.962133916683182
+      properties:
+        actual:
+          description: The actual value cannot be null if the target and notes are
+            both null
+          format: double
+          type: number
+        created_at:
+          description: The UTC date and time the KPI entry was created. Date time
+            format without timezone, e.g. `2019-01-01T00:00:00`
+          type: string
+        entry_date:
+          description: The date of the entry. Date time format without timezone, e.g.
+            `2019-01-01T00:00:00`
+          type: string
+        id:
+          description: Automatically generated for the KPI entry
+          format: int64
+          type: integer
+        kpi_id:
+          description: The kpi must be active and cannot be a calculated KPI. The
+            KPI must also be assigned to the user
+          format: int64
+          type: integer
+        notes:
+          description: The note associated with the KPI entry
+          maxLength: 500
+          type: string
+        target:
+          description: The target value of the entry. This value will be ignored if
+            the KPI has a null target
+          format: double
+          type: number
+        updated_at:
+          description: The UTC date and time the KPI entry was updated. Date time
+            format without timezone, e.g. `2019-01-01T00:00:00`
+          type: string
+        user_id:
+          description: An id of an active user to assign to the KPI entry
+          format: int64
+          type: integer
+      required:
+      - entry_date
+      - kpi_id
+      - user_id
+    User:
+      example:
+        can_admin_settings: true
+        last_login_at: last_login_at
+        created_at: created_at
+        last_name: last_name
+        can_manage_users: true
+        password: password
+        user_type: user_type
+        updated_at: updated_at
+        user_status_id: user_status_id
+        id: 0
+        first_name: first_name
+        last_password_changed_at: last_password_changed_at
+        email: email
+      properties:
+        can_admin_settings:
+          type: boolean
+        can_manage_users:
+          type: boolean
+        created_at:
+          type: string
+        email:
+          type: string
+        first_name:
+          type: string
+        id:
+          format: int64
+          type: integer
+        last_login_at:
+          type: string
+        last_name:
+          type: string
+        last_password_changed_at:
+          type: string
+        password:
+          type: string
+        updated_at:
+          type: string
+        user_status_id:
+          type: string
+        user_type:
+          type: string
+  securitySchemes:
+    basicAuth:
+      scheme: basic
+      type: http

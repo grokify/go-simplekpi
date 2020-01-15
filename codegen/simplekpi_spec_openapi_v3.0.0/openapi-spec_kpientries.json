@@ -1,0 +1,296 @@
+{
+    "openapi":"3.0.0",
+    "info":{
+        "description":"",
+        "version":"1.0",
+        "title":"SimpleKPI API",
+        "termsOfService":"https://www.simplekpi.com/Company/Terms"
+    },
+    "tags":[
+        {
+            "name":"KPI Entries"
+        }
+    ],
+    "paths":{
+        "/kpientries":{
+            "get":{
+                "tags":[
+                    "KPI Entries"
+                ],
+                "summary":"Get all KPI Entries",
+                "operationId":"getAllKPIEntries",
+                "description":"The KPI entries are filtered based on the search query string. All the search criteria is optional and we will return a maximum of 500 entries per page. If the result set has the amount of rows you set `&rows=100`, it's your responsibility to check the next page to see if there are any more -- you do this by adding &page=2 to the query, then &page=3 and so on.",
+                "parameters":[
+                    {
+                        "name":"dateFrom",
+                        "in":"query",
+                        "required":true,
+                        "schema":{
+                            "type":"string",
+                            "format":"date"
+                        }
+                    },
+                    {
+                        "name":"dateTo",
+                        "in":"query",
+                        "required":true,
+                        "schema":{
+                            "type":"string",
+                            "format":"date"
+                        }
+                    },
+                    {
+                        "name":"userid",
+                        "in":"query",
+                        "required":false,
+                        "schema":{
+                            "type":"integer"
+                        }
+                    },
+                    {
+                        "name":"kpiid",
+                        "in":"query",
+                        "required":false,
+                        "schema":{
+                            "type":"integer"
+                        }
+                    },
+                    {
+                        "name":"rows",
+                        "in":"query",
+                        "required":false,
+                        "schema":{
+                            "type":"integer"
+                        }
+                    },
+                    {
+                        "name":"page",
+                        "in":"query",
+                        "required":false,
+                        "schema":{
+                            "type":"integer"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Success",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "$ref":"#/components/schemas/KPIEntry"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "KPI Entries"
+                ],
+                "summary":"Add KPI Entry",
+                "operationId":"addKPIEntry",
+                "description":"The KPI entries are filtered based on the search query string. All the search criteria is optional and we will return a maximum of 500 entries per page. If the result set has the amount of rows you set `&rows=100`, it's your responsibility to check the next page to see if there are any more -- you do this by adding &page=2 to the query, then &page=3 and so on.",
+                "requestBody":{
+                    "description":"KPI Entry Object",
+                    "required":true,
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/KPIEntry"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"Success",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/KPIEntry"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kpientries/{kpientryid}":{
+            "get":{
+                "tags":[
+                    "KPI Entries"
+                ],
+                "summary":"Get KPI Entry",
+                "operationId":"getKPIEntry",
+                "parameters":[
+                    {
+                        "name":"kpientryid",
+                        "in":"path",
+                        "required":true,
+                        "schema":{
+                            "type":"integer",
+                            "format":"int64"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Success",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/KPIEntry"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "tags":[
+                    "KPI Entries"
+                ],
+                "summary":"Update KPI Entry",
+                "operationId":"updateKPIEntry",
+                "parameters":[
+                    {
+                        "name":"kpientryid",
+                        "in":"path",
+                        "required":true,
+                        "schema":{
+                            "type":"integer",
+                            "format":"int64"
+                        }
+                    }
+                ],
+                "requestBody":{
+                    "description":"KPI Entry Object",
+                    "required":true,
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/KPIEntry"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"Success",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/KPIEntry"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "tags":[
+                    "KPI Entries"
+                ],
+                "summary":"Delete KPI Entry",
+                "operationId":"deleteKPIEntry",
+                "parameters":[
+                    {
+                        "name":"kpientryid",
+                        "in":"path",
+                        "required":true,
+                        "schema":{
+                            "type":"integer",
+                            "format":"int64"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Success",
+                        "content":{
+
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "servers":[
+        {
+            "url":"https://YOURDOMAIN.simplekpi.com/api"
+        }
+    ],
+    "security":[
+        {
+            "basicAuth":[
+
+            ]
+        }
+    ],
+    "components":{
+        "securitySchemes":{
+            "basicAuth":{
+                "type":"http",
+                "scheme":"basic"
+            }
+        },
+        "schemas":{
+            "KPIEntry":{
+                "required":[
+                    "user_id",
+                    "kpi_id",
+                    "entry_date"
+                ],
+                "properties":{
+                    "id":{
+                        "type":"integer",
+                        "format":"int64",
+                        "description":"Automatically generated for the KPI entry"
+                    },
+                    "user_id":{
+                        "type":"integer",
+                        "format":"int64",
+                        "description":"An id of an active user to assign to the KPI entry"
+                    },
+                    "kpi_id":{
+                        "type":"integer",
+                        "format":"int64",
+                        "description":"The kpi must be active and cannot be a calculated KPI. The KPI must also be assigned to the user"
+                    },
+                    "entry_date":{
+                        "type":"string",
+                        "description":"The date of the entry. Date time format without timezone, e.g. `2019-01-01T00:00:00`"
+                    },
+                    "actual":{
+                        "type":"number",
+                        "format":"double",
+                        "description":"The actual value cannot be null if the target and notes are both null"
+                    },
+                    "target":{
+                        "type":"number",
+                        "format":"double",
+                        "description":"The target value of the entry. This value will be ignored if the KPI has a null target"
+                    },
+                    "notes":{
+                        "type":"string",
+                        "description":"The note associated with the KPI entry",
+                        "maxLength":500
+                    },
+                    "created_at":{
+                        "type":"string",
+                        "description":"The UTC date and time the KPI entry was created. Date time format without timezone, e.g. `2019-01-01T00:00:00`"
+                    },
+                    "updated_at":{
+                        "type":"string",
+                        "description":"The UTC date and time the KPI entry was updated. Date time format without timezone, e.g. `2019-01-01T00:00:00`"
+                    }
+                }
+            }
+        }
+    }
+}
