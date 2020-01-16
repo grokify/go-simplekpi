@@ -36,6 +36,30 @@ func RunQueries(client *simplekpi.APIClient, qrys KpiEntryQueries) []KpiEntryRes
 func UpsertKpiEntriesStaticTimeSeries(
 	client *simplekpi.APIClient,
 	userID, kpiID int64,
+	newSts statictimeseries.DataSeries) (KpiEntryQueries, []KpiEntryResponse, error) {
+
+	qrys := KpiEntryQueries{}
+	resps := []KpiEntryResponse{}
+
+	if len(newSts.ItemMap) == 0 {
+		return qrys, resps, nil
+	}
+	minTime, maxTime, err := newSts.MinMaxTimes()
+	if err != nil {
+		return qrys, resps, nil
+	}
+	return UpsertKpiEntriesStaticTimeSeriesTimes(
+		client, userID, kpiID,
+		minTime.Format(timeutil.RFC3339FullDate),
+		maxTime.Format(timeutil.RFC3339FullDate),
+		newSts)
+}
+
+// UpsertKpiEntriesStaticTimeSeriesTimes is a high level function that
+// takse requests and executes them.
+func UpsertKpiEntriesStaticTimeSeriesTimes(
+	client *simplekpi.APIClient,
+	userID, kpiID int64,
 	oldDateFrom, oldDateTo string,
 	newSts statictimeseries.DataSeries) (KpiEntryQueries, []KpiEntryResponse, error) {
 
