@@ -106,6 +106,7 @@ func GenerateKpiEntryQueriesYMD(userid, kpiid int64, existing []simplekpi.KpiEnt
 				continue
 			}
 			newEntry := simplekpi.KpiEntry{
+				Id:        kentry.Id,
 				UserId:    kentry.UserId,
 				KpiId:     kentry.KpiId,
 				EntryDate: kentry.EntryDate,
