@@ -39,7 +39,7 @@ func main() {
 		opts.Password = os.Getenv("SIMPLEKPI_TOKEN")
 	}
 
-	client, err := simplekpiutil.NewClient(opts.Site, opts.Username, opts.Password)
+	client, err := simplekpiutil.NewApiClient(opts.Site, opts.Username, opts.Password)
 	if err != nil {
 		log.Fatal(err)
 	}
