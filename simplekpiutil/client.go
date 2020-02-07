@@ -27,12 +27,12 @@ func NewClient(site, username, token string) (*simplekpi.APIClient, error) {
 	return client, nil
 }
 
-type Options struct {
+type Config struct {
 	Site     string `short:"s" long:"site" description:"Your site" required:"true"`
 	Username string `short:"u" long:"username" description:"Your username" required:"true"`
 	Token    string `short:"t" long:"token" description:"Your token" required:"true"`
 }
 
-func NewClientOptions(opts Options) (*simplekpi.APIClient, error) {
+func NewClientConfig(opts Config) (*simplekpi.APIClient, error) {
 	return NewClient(opts.Site, opts.Username, opts.Token)
 }
