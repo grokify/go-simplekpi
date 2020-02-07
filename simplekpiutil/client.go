@@ -10,7 +10,7 @@ import (
 
 const baseUrlFormat string = `https://%s.simplekpi.com/api`
 
-func NewClient(site, username, token string) (*simplekpi.APIClient, error) {
+func NewApiClient(site, username, token string) (*simplekpi.APIClient, error) {
 	headerVal, err := oauth2more.BasicAuthHeader(username, token)
 	if err != nil {
 		return nil, err
@@ -33,6 +33,6 @@ type Config struct {
 	Token    string `short:"t" long:"token" description:"Your token" required:"true"`
 }
 
-func NewClientConfig(opts Config) (*simplekpi.APIClient, error) {
-	return NewClient(opts.Site, opts.Username, opts.Token)
+func NewApiClientConfig(opts Config) (*simplekpi.APIClient, error) {
+	return NewApiClient(opts.Site, opts.Username, opts.Token)
 }
