@@ -44,10 +44,7 @@ func UpsertKpiEntriesStaticTimeSeries(
 	if len(newSts.ItemMap) == 0 {
 		return qrys, resps, nil
 	}
-	minTime, maxTime, err := newSts.MinMaxTimes()
-	if err != nil {
-		return qrys, resps, nil
-	}
+	minTime, maxTime := newSts.MinMaxTimes()
 	return UpsertKpiEntriesStaticTimeSeriesTimes(
 		client, userID, kpiID,
 		minTime.Format(timeutil.RFC3339FullDate),
