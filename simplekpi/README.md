@@ -38,6 +38,7 @@ Class | Method | HTTP request | Description
 *KPIEntriesApi* | [**GetKPIEntry**](docs/KPIEntriesApi.md#getkpientry) | **Get** /kpientries/{kpientryid} | Get KPI Entry
 *KPIEntriesApi* | [**UpdateKPIEntry**](docs/KPIEntriesApi.md#updatekpientry) | **Put** /kpientries/{kpientryid} | Update KPI Entry
 *KPIsApi* | [**GetAllKPIs**](docs/KPIsApi.md#getallkpis) | **Get** /kpis | Get all KPIs
+*KPIsApi* | [**GetKPI**](docs/KPIsApi.md#getkpi) | **Get** /kpis/{kpiId} | Get a KPI
 *UsersApi* | [**GetAllUsers**](docs/UsersApi.md#getallusers) | **Get** /users | Get all Users
 
 

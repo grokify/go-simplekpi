@@ -36,6 +36,39 @@
             }
           }
         }
+      },
+      "/kpis/{kpiId}":{
+        "get":{
+          "tags":[
+            "KPIs"
+          ],
+          "summary":"Get a KPI",
+          "operationId":"getKPI",
+          "description":"Returns data on a single KPIs.",
+          "parameters":[
+            {
+                "name":"kpiId",
+                "in":"path",
+                "required":true,
+                "schema":{
+                    "type":"integer",
+                    "format":"int64"
+                }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"Success",
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "$ref":"#/components/schemas/KPI"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "servers":[

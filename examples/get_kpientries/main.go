@@ -49,6 +49,16 @@ func main() {
 		params.Kpiid = optional.NewInt32(opts.Kpiid)
 	}
 
+	kpi, resp, err := client.KPIsApi.GetKPI(
+		context.Background(),
+		int64(opts.Kpiid))
+	if err != nil {
+		log.Fatal(err)
+	} else if resp.StatusCode > 299 {
+		log.Fatal(resp.StatusCode)
+	}
+	fmtutil.PrintJSON(kpi)
+
 	kpientries, resp, err := client.KPIEntriesApi.GetAllKPIEntries(
 		context.Background(),
 		"2020-01-01",
