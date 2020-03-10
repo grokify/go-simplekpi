@@ -5,10 +5,14 @@ import (
 
 	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/gotilla/net/httputilmore"
+	"github.com/grokify/gotilla/time/timeutil"
 	"github.com/grokify/oauth2more"
 )
 
-const baseUrlFormat string = `https://%s.simplekpi.com/api`
+const (
+	baseUrlFormat = `https://%s.simplekpi.com/api`
+	ApiTimeFormat = timeutil.ISO8601NoTZ
+)
 
 func NewApiClient(site, username, token string) (*simplekpi.APIClient, error) {
 	headerVal, err := oauth2more.BasicAuthHeader(username, token)
