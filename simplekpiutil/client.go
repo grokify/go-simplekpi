@@ -11,6 +11,7 @@ import (
 
 const (
 	baseUrlFormat = `https://%s.simplekpi.com/api`
+	ApiDateFormat = timeutil.RFC3339FullDate
 	ApiTimeFormat = timeutil.ISO8601NoTZ
 )
 

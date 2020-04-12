@@ -1,4 +1,4 @@
-package simplekpiutil
+package sk2gocharts
 
 import (
 	"context"
@@ -40,7 +40,7 @@ func (dss *SimplekpiDataSeriesSet) LoadData(client *simplekpi.APIClient) error {
 			dss.KpiInfos = map[int32]simplekpi.Kpi{}
 		}
 		dss.KpiInfos[kpiID] = kpi
-		ds, err := GetKpiIdAsSTS(client, kpiID, dss.StartTime, dss.EndTime)
+		ds, err := GetKpiAsDataSeries(client, uint64(kpiID), dss.StartTime, dss.EndTime)
 		if err != nil {
 			return errors.Wrap(err, funcName)
 		}
