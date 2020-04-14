@@ -66,26 +66,23 @@ func getXoxString(ds statictimeseries.DataSeries, kpiID uint64, sourceString str
 	if err != nil {
 		return "", err
 	}
-	if verbose {
-		fmtutil.PrintJSON(xox)
-	}
 	xoxLast := xox.Last()
-	if verbose {
-		fmtutil.PrintJSON(xoxLast)
-	}
-	xoxLines := []string{}
-	xoxLines = append(xoxLines, fmt.Sprintf("MAU: %s\n", strconvutil.Commify(xoxLast.Value)))
-	xoxLines = append(xoxLines, fmt.Sprintf("MoM: %.1f%%", xoxLast.MoM))
-	xoxLines = append(xoxLines, fmt.Sprintf("MAU: %s\n", strconvutil.Commify(xoxLast.MMAgoValue)))
-	xoxLines = append(xoxLines, fmt.Sprintf("QoQ: %.1f%%", xoxLast.QoQ))
-	xoxLines = append(xoxLines, fmt.Sprintf("MAU: %s\n", strconvutil.Commify(xoxLast.MQAgoValue)))
-	xoxLines = append(xoxLines, fmt.Sprintf("YoY: %.1f%%", xoxLast.YoY))
-	xoxLines = append(xoxLines, fmt.Sprintf("MAU: %s\n", strconvutil.Commify(xoxLast.MYAgoValue)))
+
+	xoxLines := []string{
+		fmt.Sprintf("MAU: %s\n", strconvutil.Commify(xoxLast.Value)),
+		fmt.Sprintf("MoM: %.1f%%", xoxLast.MoM),
+		fmt.Sprintf("MAU: %s\n", strconvutil.Commify(xoxLast.MMAgoValue)),
+		fmt.Sprintf("QoQ: %.1f%%", xoxLast.QoQ),
+		fmt.Sprintf("MAU: %s\n", strconvutil.Commify(xoxLast.MQAgoValue)),
+		fmt.Sprintf("YoY: %.1f%%", xoxLast.YoY),
+		fmt.Sprintf("MAU: %s\n", strconvutil.Commify(xoxLast.MYAgoValue))}
 	if len(strings.TrimSpace(sourceString)) > 0 {
 		xoxLines = append(xoxLines, sourceString)
 	}
 	xoxString = strings.Join(xoxLines, "\n")
 	if verbose {
+		fmtutil.PrintJSON(xox)
+		fmtutil.PrintJSON(xoxLast)
 		fmt.Println(xoxString)
 	}
 	return xoxString, nil
