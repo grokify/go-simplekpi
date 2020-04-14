@@ -23,7 +23,7 @@ type Options struct {
 }
 
 func main() {
-	imageBaseURL := "https://aa9770e8.ngrok.io/"
+	imageBaseURL := "https://11111111.ngrok.io/"
 
 	opts := Options{}
 	_, err := flags.Parse(&opts)
