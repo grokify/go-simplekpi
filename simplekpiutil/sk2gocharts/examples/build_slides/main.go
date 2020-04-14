@@ -1,19 +1,15 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"log"
 	"os"
 	"time"
 
-	"github.com/antihax/optional"
-	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/go-simplekpi/simplekpiutil"
 	"github.com/grokify/go-simplekpi/simplekpiutil/sk2gocharts"
 	"github.com/grokify/googleutil/slidesutil/v1"
 	"github.com/grokify/gotilla/config"
-	"github.com/grokify/gotilla/fmt/fmtutil"
 	"github.com/grokify/oauth2more/google"
 	"github.com/jessevdk/go-flags"
 )
@@ -27,6 +23,8 @@ type Options struct {
 }
 
 func main() {
+	imageBaseURL := "https://aa9770e8.ngrok.io/"
+
 	opts := Options{}
 	_, err := flags.Parse(&opts)
 	if err != nil {
@@ -70,76 +68,12 @@ func main() {
 
 	for _, kpiID := range kpis {
 		err = sk2gocharts.CreateKPISlide(skAPIClient, pc,
-			kpiID, "https://aae6183a.ngrok.io/",
-			fmt.Sprintf("Source: AGW Logs via\nMetabase &\nSimpleKPI #%d", kpiID),
+			kpiID, imageBaseURL,
+			fmt.Sprintf("Source: Metabase &\nSimpleKPI #%d", kpiID),
 			true)
 		if err != nil {
 			log.Fatal(err)
 		}
-	}
-
-	if 1 == 0 {
-		kpi, resp, err := skAPIClient.KPIsApi.GetKPI(
-			context.Background(),
-			int64(opts.Kpiid))
-		if err != nil {
-			log.Fatal(err)
-		} else if resp.StatusCode > 299 {
-			log.Fatal(resp.StatusCode)
-		}
-		fmtutil.PrintJSON(kpi)
-	}
-	if 1 == 0 {
-		params := &simplekpi.GetAllKPIEntriesOpts{}
-		if opts.Kpiid > 0 {
-			params.Kpiid = optional.NewInt32(opts.Kpiid)
-		}
-
-		kpientries, resp, err := skAPIClient.KPIEntriesApi.GetAllKPIEntries(
-			context.Background(),
-			"2010-01-01",
-			"2020-02-01",
-			params,
-		)
-		if err != nil {
-			log.Fatal(err)
-		} else if resp.StatusCode > 299 {
-			log.Fatal(resp.StatusCode)
-		}
-		fmtutil.PrintJSON(kpientries)
-	}
-	if 1 == 0 {
-		test := simplekpi.KpiEntry{
-			KpiId:     111,
-			UserId:    222,
-			EntryDate: "2020-01-01",
-			Actual:    12345.0,
-		}
-		kpi, resp, err := skAPIClient.KPIEntriesApi.AddKPIEntry(
-			context.Background(),
-			test,
-		)
-		if err != nil {
-			log.Fatal(err)
-		} else if resp.StatusCode > 299 {
-			log.Fatal(resp.StatusCode)
-		}
-		fmt.Printf("SUCCESS [%v]\n", resp.StatusCode)
-		fmtutil.PrintJSON(kpi)
-	}
-
-	if 1 == 0 {
-		kpientryid := int64(333)
-		resp, err := skAPIClient.KPIEntriesApi.DeleteKPIEntry(
-			context.Background(),
-			kpientryid,
-		)
-		if err != nil {
-			log.Fatal(err)
-		} else if resp.StatusCode > 299 {
-			log.Fatal(resp.StatusCode)
-		}
-		fmt.Printf("DELETE SUCCESS [%v]\n", resp.StatusCode)
 	}
 
 	fmt.Println("DONE")
