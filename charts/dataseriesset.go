@@ -1,4 +1,4 @@
-package sk2gocharts
+package charts
 
 import (
 	"context"

@@ -6,8 +6,8 @@ import (
 	"os"
 	"time"
 
+	"github.com/grokify/go-simplekpi/charts"
 	"github.com/grokify/go-simplekpi/simplekpiutil"
-	"github.com/grokify/go-simplekpi/simplekpiutil/sk2gocharts"
 	"github.com/grokify/googleutil/slidesutil/v1"
 	"github.com/grokify/gotilla/config"
 	"github.com/grokify/oauth2more/google"
@@ -23,7 +23,7 @@ type Options struct {
 }
 
 func main() {
-	imageBaseURL := "https://11111111.ngrok.io/"
+	imageBaseURL := "https://06afcd6b.ngrok.io/"
 
 	opts := Options{}
 	_, err := flags.Parse(&opts)
@@ -67,7 +67,7 @@ func main() {
 	kpis := []uint64{94, 92, 93}
 
 	for _, kpiID := range kpis {
-		err = sk2gocharts.CreateKPISlide(skAPIClient, pc,
+		err = charts.CreateKPISlide(skAPIClient, pc,
 			kpiID, imageBaseURL,
 			fmt.Sprintf("Source: Metabase &\nSimpleKPI #%d", kpiID),
 			true)

@@ -1,4 +1,4 @@
-package sk2gocharts
+package charts
 
 import (
 	"fmt"
@@ -30,6 +30,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 			monthAgo := month.MonthBegin(dt, 0)
 			return monthAgo.Format("Jan '06")
 		},
+		Legend:           true,
 		RegressionDegree: 3,
 		QAgoAnnotation:   true,
 		YAgoAnnotation:   true,
