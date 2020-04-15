@@ -31,7 +31,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 			return monthAgo.Format("Jan '06")
 		},
 		Legend:           true,
-		RegressionDegree: 3,
+		RegressionDegree: 1,
 		QAgoAnnotation:   true,
 		YAgoAnnotation:   true,
 		AgoAnnotationPct: true})
