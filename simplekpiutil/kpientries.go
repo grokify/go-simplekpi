@@ -36,20 +36,20 @@ func RunQueries(client *simplekpi.APIClient, qrys KpiEntryQueries) []KpiEntryRes
 func UpsertKpiEntriesStaticTimeSeries(
 	client *simplekpi.APIClient,
 	userID, kpiID int64,
-	newSts statictimeseries.DataSeries) (KpiEntryQueries, []KpiEntryResponse, error) {
+	ds statictimeseries.DataSeries) (KpiEntryQueries, []KpiEntryResponse, error) {
 
 	qrys := KpiEntryQueries{}
 	resps := []KpiEntryResponse{}
 
-	if len(newSts.ItemMap) == 0 {
+	if len(ds.ItemMap) == 0 {
 		return qrys, resps, nil
 	}
-	minTime, maxTime := newSts.MinMaxTimes()
+	minTime, maxTime := ds.MinMaxTimes()
 	return UpsertKpiEntriesStaticTimeSeriesTimes(
 		client, userID, kpiID,
 		minTime.Format(timeutil.RFC3339FullDate),
 		maxTime.Format(timeutil.RFC3339FullDate),
-		newSts)
+		ds)
 }
 
 // UpsertKpiEntriesStaticTimeSeriesTimes is a high level function that
@@ -58,7 +58,7 @@ func UpsertKpiEntriesStaticTimeSeriesTimes(
 	client *simplekpi.APIClient,
 	userID, kpiID int64,
 	oldDateFrom, oldDateTo string,
-	newSts statictimeseries.DataSeries) (KpiEntryQueries, []KpiEntryResponse, error) {
+	ds statictimeseries.DataSeries) (KpiEntryQueries, []KpiEntryResponse, error) {
 
 	qrys := KpiEntryQueries{}
 	resps := []KpiEntryResponse{}
@@ -74,7 +74,7 @@ func UpsertKpiEntriesStaticTimeSeriesTimes(
 	} else if resp.StatusCode >= 300 {
 		return qrys, resps, fmt.Errorf("E_SIMPLEKPI_API_STATUS_CODE [%v]", resp.StatusCode)
 	}
-	qrys = GenerateKpiEntryQueriesYMD(userID, kpiID, entries, newSts)
+	qrys = GenerateKpiEntryQueriesYMD(userID, kpiID, entries, ds)
 	resps = RunQueries(client, qrys)
 	return qrys, resps, nil
 }
