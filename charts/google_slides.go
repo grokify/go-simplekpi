@@ -22,16 +22,26 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 	if err != nil {
 		return err
 	}
-	ds.Pop()
+	if ds.Interval == timeutil.Month {
+		ds.Pop()
+	}
 
-	graph := sts2wchart.DataSeriesMonthToLineChart(ds, sts2wchart.LineChartMonthOpts{
+	graph := sts2wchart.DataSeriesMonthToLineChart(ds, sts2wchart.LineChartOpts{
 		TitleSuffixCurrentValue: true,
 		TitleSuffixCurrentDateFunc: func(dt time.Time) string {
+			if ds.Interval == timeutil.Quarter {
+				lastQuarter, err := ds.Last()
+				if err != nil {
+					return ""
+				}
+				return timeutil.FormatQuarterYYYYQ(lastQuarter.Time)
+			}
 			monthAgo := month.MonthBegin(dt, 0)
 			return monthAgo.Format("Jan '06")
 		},
 		Legend:           true,
 		RegressionDegree: 1,
+		Interval:         ds.Interval,
 		QAgoAnnotation:   true,
 		YAgoAnnotation:   true,
 		AgoAnnotationPct: true})
@@ -63,7 +73,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 
 func getXoxString(ds statictimeseries.DataSeries, kpiID uint64, sourceString string, verbose bool) (string, error) {
 	xoxString := ""
-	xox, err := statictimeseries.NewXoXDSMonth(ds)
+	xox, err := statictimeseries.NewXoXDataSeries(ds)
 	if err != nil {
 		return "", err
 	}

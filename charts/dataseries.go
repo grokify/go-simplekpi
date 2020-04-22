@@ -8,6 +8,7 @@ import (
 	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/go-simplekpi/simplekpiutil"
 	"github.com/grokify/gocharts/data/statictimeseries"
+	"github.com/grokify/gotilla/time/timeutil"
 	"github.com/pkg/errors"
 )
 
@@ -26,14 +27,21 @@ func GetKpiAsDataSeries(skApiClient *simplekpi.APIClient, kpiId uint64, startDat
 }
 
 func KpiAndEntriesToDataSeries(kpi simplekpi.Kpi, entries []simplekpi.KpiEntry) (statictimeseries.DataSeries, error) {
-	return KpiEntriesToDataSeries(kpi.Name, entries)
+	interval := timeutil.Month
+	if strings.ToUpper(strings.TrimSpace(kpi.FrequencyId)) == "Q" {
+		interval = timeutil.Quarter
+	} else if strings.ToUpper(strings.TrimSpace(kpi.FrequencyId)) == "M" {
+		interval = timeutil.Month
+	}
+	return KpiEntriesToDataSeries(kpi.Name, entries, interval)
 }
 
 // KpiEntriesToDataSeries converets a slice of KpiEntry to
 // `statictimeseris.DataSeries`
-func KpiEntriesToDataSeries(seriesName string, kpiEntries []simplekpi.KpiEntry) (statictimeseries.DataSeries, error) {
+func KpiEntriesToDataSeries(seriesName string, kpiEntries []simplekpi.KpiEntry, interval timeutil.Interval) (statictimeseries.DataSeries, error) {
 	ds := statictimeseries.NewDataSeries()
 	ds.SeriesName = strings.TrimSpace(seriesName)
+	ds.Interval = interval
 	for _, kpie := range kpiEntries {
 		dataItem, err := KpiEntryToDataItem(ds.SeriesName, kpie)
 		if err != nil {

@@ -23,7 +23,7 @@ type Options struct {
 }
 
 func main() {
-	imageBaseURL := "https://06afcd6b.ngrok.io/"
+	imageBaseURL := "https://6e7fbb07.ngrok.io"
 
 	opts := Options{}
 	_, err := flags.Parse(&opts)
@@ -64,7 +64,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	kpis := []uint64{94, 92, 93}
+	kpis := []uint64{139, 140, 141, 142, 94, 92, 93, 133, 134, 135}
+	kpis = []uint64{92, 145}
+	kpis = []uint64{145, 146, 147}
+	//kpis = []uint64{92}
 
 	for _, kpiID := range kpis {
 		err = charts.CreateKPISlide(skAPIClient, pc,
