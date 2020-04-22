@@ -2,6 +2,8 @@ package simplekpiutil
 
 import (
 	"fmt"
+	"os"
+	"strconv"
 
 	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/gotilla/net/httputilmore"
@@ -13,6 +15,11 @@ const (
 	baseUrlFormat = `https://%s.simplekpi.com/api`
 	ApiDateFormat = timeutil.RFC3339FullDate
 	ApiTimeFormat = timeutil.ISO8601NoTZ
+
+	EnvSimplekpiSite     = "SIMPLEKPI_SITE"
+	EnvSimplekpiToken    = "SIMPLEKPI_TOKEN"
+	EnvSimplekpiUsername = "SIMPLEKPI_USERNAME"
+	EnvSimplekpiUserID   = "SIMPLEKPI_USERID"
 )
 
 func NewApiClient(site, username, token string) (*simplekpi.APIClient, error) {
@@ -40,4 +47,23 @@ type Config struct {
 
 func NewApiClientConfig(opts Config) (*simplekpi.APIClient, error) {
 	return NewApiClient(opts.Site, opts.Username, opts.Token)
+}
+
+func NewApiClientEnv() (*simplekpi.APIClient, error) {
+	return NewApiClient(
+		os.Getenv(EnvSimplekpiSite),
+		os.Getenv(EnvSimplekpiUsername),
+		os.Getenv(EnvSimplekpiToken))
+}
+
+func GetUserIDEnv() (uint, error) {
+	userIDString := os.Getenv(EnvSimplekpiUserID)
+	if len(userIDString) == 0 {
+		return 0, fmt.Errorf("E_NO_USER_ID_ENV_VAR")
+	}
+	num, err := strconv.Atoi(userIDString)
+	if err != nil {
+		return 0, err
+	}
+	return uint(num), nil
 }
