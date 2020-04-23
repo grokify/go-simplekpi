@@ -12,13 +12,25 @@ import (
 	"github.com/grokify/googleutil/slidesutil/v1"
 	"github.com/grokify/gotilla/fmt/fmtutil"
 	"github.com/grokify/gotilla/net/urlutil"
-	"github.com/grokify/gotilla/strconv/strconvutil"
 	"github.com/grokify/gotilla/time/month"
 	"github.com/grokify/gotilla/time/timeutil"
 )
 
-func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCreator, kpiID uint64, imageServerURL string, sourceString string, verbose bool) error {
-	ds, err := GetKpiAsDataSeries(skClient, kpiID, timeutil.TimeZeroRFC3339(), time.Now())
+type KpiSlideOpts struct {
+	SlideType     string
+	KpiID         uint64
+	KpiTypeAbbr   string
+	ImageBaseURL  string
+	Title         string
+	Reference     string
+	Verbose       bool
+	ValueToString func(int64) string
+}
+
+// func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCreator, kpiID uint64, imageServerURL string, sourceString string, verbose bool) error {
+
+func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCreator, opts KpiSlideOpts) error {
+	ds, err := GetKpiAsDataSeries(skClient, opts.KpiID, timeutil.TimeZeroRFC3339(), time.Now())
 	if err != nil {
 		return err
 	}
@@ -42,8 +54,12 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 		}
 	}
 
+	if len(opts.Title) > 0 {
+		ds.SeriesName = opts.Title
+	}
 	graph := sts2wchart.DataSeriesMonthToLineChart(ds, sts2wchart.LineChartOpts{
-		TitleSuffixCurrentValue: true,
+		TitleSuffixCurrentValue:     true,
+		TitleSuffixCurrentValueFunc: opts.ValueToString,
 		TitleSuffixCurrentDateFunc: func(dt time.Time) string {
 			if ds.Interval == timeutil.Quarter {
 				lastQuarter, err := ds.Last()
@@ -62,18 +78,18 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 		YAgoAnnotation:   true,
 		AgoAnnotationPct: true})
 
-	localChartFilename := fmt.Sprintf("_output_line_%d.png", kpiID)
+	localChartFilename := fmt.Sprintf("_output_line_%d.png", opts.KpiID)
 	err = wchart.WritePNG(localChartFilename, graph)
 	if err != nil {
 		return err
 	}
 
 	if pc != nil {
-		imageServerURL = strings.TrimSpace(imageServerURL)
-		if len(imageServerURL) > 0 {
-			imageURL := urlutil.JoinAbsolute(imageServerURL, localChartFilename)
+		opts.ImageBaseURL = strings.TrimSpace(opts.ImageBaseURL)
+		if len(opts.ImageBaseURL) > 0 {
+			imageURL := urlutil.JoinAbsolute(opts.ImageBaseURL, localChartFilename)
 
-			xoxString, err := getXoxString(ds, kpiID, sourceString, verbose)
+			xoxString, err := getXoxString(ds, opts.KpiID, opts.KpiTypeAbbr, opts.Reference, opts.ValueToString, opts.Verbose)
 			if err != nil {
 				return err
 			}
@@ -87,7 +103,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 	return nil
 }
 
-func getXoxString(ds statictimeseries.DataSeries, kpiID uint64, sourceString string, verbose bool) (string, error) {
+func getXoxString(ds statictimeseries.DataSeries, kpiID uint64, kpiTypeAbbr, sourceString string, fmtValue func(int64) string, verbose bool) (string, error) {
 	xoxString := ""
 	xox, err := statictimeseries.NewXoXDataSeries(ds)
 	if err != nil {
@@ -96,13 +112,13 @@ func getXoxString(ds statictimeseries.DataSeries, kpiID uint64, sourceString str
 	xoxLast := xox.Last()
 
 	xoxLines := []string{
-		fmt.Sprintf("MAU: %s\n", strconvutil.Commify(xoxLast.Value)),
+		fmt.Sprintf("%s: %s\n", kpiTypeAbbr, fmtValue(xoxLast.Value)),
 		fmt.Sprintf("MoM: %.1f%%", xoxLast.MoM),
-		fmt.Sprintf("MAU: %s\n", strconvutil.Commify(xoxLast.MMAgoValue)),
+		fmt.Sprintf("%s: %s\n", kpiTypeAbbr, fmtValue(xoxLast.MMAgoValue)),
 		fmt.Sprintf("QoQ: %.1f%%", xoxLast.QoQ),
-		fmt.Sprintf("MAU: %s\n", strconvutil.Commify(xoxLast.MQAgoValue)),
+		fmt.Sprintf("%s: %s\n", kpiTypeAbbr, fmtValue(xoxLast.MQAgoValue)),
 		fmt.Sprintf("YoY: %.1f%%", xoxLast.YoY),
-		fmt.Sprintf("MAU: %s\n", strconvutil.Commify(xoxLast.MYAgoValue))}
+		fmt.Sprintf("%s: %s\n", kpiTypeAbbr, fmtValue(xoxLast.MYAgoValue))}
 	if len(strings.TrimSpace(sourceString)) > 0 {
 		xoxLines = append(xoxLines, sourceString)
 	}
