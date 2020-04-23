@@ -23,7 +23,23 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 		return err
 	}
 	if ds.Interval == timeutil.Month {
-		ds.Pop()
+		itemLast, err := ds.Last()
+		if err == nil {
+			itemLastMonthStart := timeutil.MonthStart(itemLast.Time)
+			nowMonthStart := timeutil.MonthStart(time.Now())
+			if itemLastMonthStart.Equal(nowMonthStart) {
+				ds.Pop()
+			}
+		}
+	} else if ds.Interval == timeutil.Quarter {
+		itemLast, err := ds.Last()
+		if err == nil {
+			itemLastQtrStart := timeutil.QuarterStart(itemLast.Time)
+			nowQtrStart := timeutil.QuarterStart(time.Now())
+			if itemLastQtrStart.Equal(nowQtrStart) {
+				ds.Pop()
+			}
+		}
 	}
 
 	graph := sts2wchart.DataSeriesMonthToLineChart(ds, sts2wchart.LineChartOpts{
