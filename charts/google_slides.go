@@ -21,6 +21,9 @@ type KpiSlideOpts struct {
 	KpiID         uint64
 	KpiTypeAbbr   string
 	ImageBaseURL  string
+	ImageHeight   uint64
+	ImageWidth    uint64
+	ImageRatio    float64
 	Title         string
 	Reference     string
 	Verbose       bool
@@ -71,12 +74,16 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 			monthAgo := month.MonthBegin(dt, 0)
 			return monthAgo.Format("Jan '06")
 		},
+		Height:           opts.ImageHeight,
+		Width:            opts.ImageWidth,
+		AspectRatio:      opts.ImageRatio,
 		Legend:           true,
 		RegressionDegree: 1,
 		Interval:         ds.Interval,
 		QAgoAnnotation:   true,
 		YAgoAnnotation:   true,
-		AgoAnnotationPct: true})
+		AgoAnnotationPct: true,
+		YAxisLeft:        true})
 
 	localChartFilename := fmt.Sprintf("_output_line_%d.png", opts.KpiID)
 	err = wchart.WritePNG(localChartFilename, graph)
