@@ -70,10 +70,13 @@ func main() {
 	//kpis = []uint64{92}
 
 	for _, kpiID := range kpis {
-		err = charts.CreateKPISlide(skAPIClient, pc,
-			kpiID, imageBaseURL,
-			fmt.Sprintf("Source: Metabase &\nSimpleKPI #%d", kpiID),
-			true)
+		opts := charts.KpiSlideOpts{
+			KpiID:        kpiID,
+			ImageBaseURL: imageBaseURL,
+			Reference:    fmt.Sprintf("Source: Metabase &\nSimpleKPI #%d", kpiID),
+			Verbose:      true}
+
+		err = charts.CreateKPISlide(skAPIClient, pc, opts)
 		if err != nil {
 			log.Fatal(err)
 		}
