@@ -11,31 +11,68 @@ import (
 	"github.com/grokify/gocharts/data/statictimeseries"
 	"github.com/grokify/googleutil/slidesutil/v1"
 	"github.com/grokify/gotilla/fmt/fmtutil"
+	"github.com/grokify/gotilla/math/ratio"
 	"github.com/grokify/gotilla/net/urlutil"
+	"github.com/grokify/gotilla/strconv/strconvutil"
 	"github.com/grokify/gotilla/time/month"
 	"github.com/grokify/gotilla/time/timeutil"
 )
 
+const DefaultXAxisTimeFormat = "Jan '06"
+
 type KpiSlideOpts struct {
-	SlideType     string
-	KpiID         uint64
-	KpiTypeAbbr   string
-	ImageBaseURL  string
-	ImageHeight   uint64
-	ImageWidth    uint64
-	ImageRatio    float64
-	Title         string
-	Reference     string
-	Verbose       bool
-	ValueToString func(int64) string
+	SlideType         string
+	KpiID             uint64
+	KpiTypeAbbr       string
+	ImageBaseURL      string
+	ImageHeight       uint64
+	ImageWidth        uint64
+	ImageRatio        float64
+	Title             string
+	Reference         string
+	Verbose           bool
+	ValueToString     func(int64) string
+	XAxisTimeToString func(time.Time) string
 }
 
-// func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCreator, kpiID uint64, imageServerURL string, sourceString string, verbose bool) error {
+func KpiTypeAbbrIsDollars(abbr string) bool {
+	abbr = strings.ToUpper(strings.TrimSpace(abbr))
+	if abbr == "MRR" || abbr == "ARR" {
+		return true
+	}
+	return false
+}
+
+func KpiSlideOptsDefaultify(opts KpiSlideOpts) KpiSlideOpts {
+	if opts.ValueToString == nil {
+		if KpiTypeAbbrIsDollars(opts.KpiTypeAbbr) {
+			opts.ValueToString = func(val int64) string {
+				return "$" + strconvutil.Commify(val)
+			}
+		} else {
+			opts.ValueToString = func(val int64) string {
+				return strconvutil.Commify(val)
+			}
+		}
+	}
+	return opts
+}
+
+func KpiSlideOptsSize2Col(opts KpiSlideOpts) KpiSlideOpts {
+	opts.ImageRatio = ratio.RatioAcademy
+	if opts.ImageHeight == 0 && opts.ImageWidth == 0 {
+		opts.ImageHeight = 600
+	}
+	return opts
+}
 
 func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCreator, opts KpiSlideOpts) error {
 	ds, err := GetKpiAsDataSeries(skClient, opts.KpiID, timeutil.TimeZeroRFC3339(), time.Now())
 	if err != nil {
 		return err
+	}
+	if opts.Verbose {
+		fmtutil.PrintJSON(ds)
 	}
 	if ds.Interval == timeutil.Month {
 		itemLast, err := ds.Last()
@@ -60,6 +97,11 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 	if len(opts.Title) > 0 {
 		ds.SeriesName = opts.Title
 	}
+	if opts.XAxisTimeToString == nil {
+		opts.XAxisTimeToString = func(dt time.Time) string {
+			return dt.Format(DefaultXAxisTimeFormat)
+		}
+	}
 	graph := sts2wchart.DataSeriesMonthToLineChart(ds, sts2wchart.LineChartOpts{
 		TitleSuffixCurrentValue:     true,
 		TitleSuffixCurrentValueFunc: opts.ValueToString,
@@ -83,7 +125,9 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 		QAgoAnnotation:   true,
 		YAgoAnnotation:   true,
 		AgoAnnotationPct: true,
-		YAxisLeft:        true})
+		YAxisLeft:        true,
+		YAxisTickFunc:    opts.XAxisTimeToString,
+	})
 
 	localChartFilename := fmt.Sprintf("_output_line_%d.png", opts.KpiID)
 	err = wchart.WritePNG(localChartFilename, graph)
