@@ -23,7 +23,7 @@ type Options struct {
 }
 
 func main() {
-	imageBaseURL := "https://6e7fbb07.ngrok.io"
+	imageBaseURL := "https://75247e3e.ngrok.io"
 
 	opts := Options{}
 	_, err := flags.Parse(&opts)
@@ -64,10 +64,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	kpis := []uint64{139, 140, 141, 142, 94, 92, 93, 133, 134, 135}
-	kpis = []uint64{92, 145}
-	kpis = []uint64{145, 146, 147}
-	//kpis = []uint64{92}
+	kpis := []uint64{100}
 
 	for _, kpiID := range kpis {
 		opts := charts.KpiSlideOpts{
@@ -75,6 +72,9 @@ func main() {
 			ImageBaseURL: imageBaseURL,
 			Reference:    fmt.Sprintf("Source: Metabase &\nSimpleKPI #%d", kpiID),
 			Verbose:      true}
+
+		opts = charts.KpiSlideOptsDefaultify(opts)
+		opts = charts.KpiSlideOptsSize2Col(opts)
 
 		err = charts.CreateKPISlide(skAPIClient, pc, opts)
 		if err != nil {
