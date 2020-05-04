@@ -33,6 +33,7 @@ type KpiSlideOpts struct {
 	Verbose           bool
 	ValueToString     func(int64) string
 	XAxisTimeToString func(time.Time) string
+	SlideBuildExec    bool
 }
 
 func KpiTypeAbbrIsDollars(abbr string) bool {
@@ -102,7 +103,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 			return dt.Format(DefaultXAxisTimeFormat)
 		}
 	}
-	graph := sts2wchart.DataSeriesMonthToLineChart(ds, sts2wchart.LineChartOpts{
+	graph := sts2wchart.DataSeriesToLineChart(ds, sts2wchart.LineChartOpts{
 		TitleSuffixCurrentValue:     true,
 		TitleSuffixCurrentValueFunc: opts.ValueToString,
 		TitleSuffixCurrentDateFunc: func(dt time.Time) string {
@@ -134,8 +135,9 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 	if err != nil {
 		return err
 	}
+	fmt.Printf("WROTE [%s]\n", localChartFilename)
 
-	if pc != nil {
+	if pc != nil && opts.SlideBuildExec {
 		opts.ImageBaseURL = strings.TrimSpace(opts.ImageBaseURL)
 		if len(opts.ImageBaseURL) > 0 {
 			imageURL := urlutil.JoinAbsolute(opts.ImageBaseURL, localChartFilename)

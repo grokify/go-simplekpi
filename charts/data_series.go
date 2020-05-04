@@ -14,7 +14,7 @@ import (
 
 func GetKpiAsDataSeries(skApiClient *simplekpi.APIClient, kpiId uint64, startDate, endDate time.Time) (statictimeseries.DataSeries, error) {
 	ds := statictimeseries.NewDataSeries()
-	sku := simplekpiutil.ClientUtil{Client: skApiClient}
+	sku := simplekpiutil.ClientUtil{APIClient: skApiClient}
 	kpi, err := sku.GetKPI(kpiId)
 	if err != nil {
 		return ds, err
