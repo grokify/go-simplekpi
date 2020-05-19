@@ -2,6 +2,8 @@ package simplekpiutil
 
 import (
 	"fmt"
+	"log"
+	"time"
 
 	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/gocharts/data/statictimeseries"
@@ -51,4 +53,17 @@ func (kec *KpiEntriesClient) UpsertKpiEntriesDataSeriesSetSimple(name2KpiID map[
 	}
 
 	return queries, responses, nil
+}
+
+func WriteKpisXlsx(apiClient *simplekpi.APIClient, filename string, kpiIDs []uint64, dateStart, dateEnd time.Time) error {
+	cu := ClientUtil{APIClient: apiClient}
+	data := []statictimeseries.DataSeries{}
+	for _, kpiID := range kpiIDs {
+		ds, err := cu.GetKPIEntriesAsDataSeries(kpiID, dateStart, dateEnd)
+		if err != nil {
+			log.Fatal(err)
+		}
+		data = append(data, ds)
+	}
+	return statictimeseries.DataSeriesSliceWriteXLSX(filename, data)
 }
