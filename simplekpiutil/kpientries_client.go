@@ -35,7 +35,7 @@ func (kec *KpiEntriesClient) UpsertKpiEntriesDataSeries(kpiID int64,
 }
 
 func (kec *KpiEntriesClient) UpsertKpiEntriesDataSeriesSetSimple(name2KpiID map[string]int64,
-	ds3 statictimeseries.DataSeriesSetSimple) ([]KpiEntryQueries, [][]KpiEntryResponse, error) {
+	ds3 statictimeseries.DataSeriesSet) ([]KpiEntryQueries, [][]KpiEntryResponse, error) {
 
 	queries := []KpiEntryQueries{}
 	responses := [][]KpiEntryResponse{}
