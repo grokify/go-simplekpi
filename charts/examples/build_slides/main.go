@@ -8,8 +8,14 @@ import (
 
 	"github.com/grokify/go-simplekpi/charts"
 	"github.com/grokify/go-simplekpi/simplekpiutil"
+	"github.com/grokify/gocharts/charts/wchart"
+	"github.com/grokify/gocharts/charts/wchart/sts2wchart"
+	"github.com/grokify/gocharts/data/statictimeseries"
 	"github.com/grokify/googleutil/slidesutil/v1"
 	"github.com/grokify/gotilla/config"
+	"github.com/grokify/gotilla/fmt/fmtutil"
+	"github.com/grokify/gotilla/math/ratio"
+	"github.com/grokify/gotilla/time/timeutil"
 	"github.com/grokify/oauth2more/google"
 	"github.com/jessevdk/go-flags"
 )
@@ -23,7 +29,7 @@ type Options struct {
 }
 
 func main() {
-	imageBaseURL := "https://75247e3e.ngrok.io"
+	imageBaseURL := "https://7e388a1e.ngrok.io"
 
 	opts := Options{}
 	_, err := flags.Parse(&opts)
@@ -46,6 +52,97 @@ func main() {
 		log.Fatal(err)
 	}
 
+	if 1 == 1 {
+		//t0 := timeutil.TimeZeroRFC3339()
+		t0, err := time.Parse(timeutil.RFC3339FullDate, "2017-01-01")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		ds1, ds2, ds3, err := charts.PercentTwoKPIs(
+			skAPIClient, 159, 158, t0, time.Now())
+		if err != nil {
+			log.Fatal(err)
+		}
+		ds1.SetSeriesName("MAA Platform Apps")
+		ds2.SetSeriesName("MAA RC Native Apps")
+		ds3.SetSeriesName("MAA % Adoption Platform vs. Native")
+
+		fmtutil.PrintJSON(ds3)
+
+		if 1 == 1 {
+			dss := statictimeseries.NewDataSeriesSet()
+			dss.Name = "Adoption"
+			dss.AddDataSeries(ds1)
+			dss.AddDataSeries(ds2)
+			dss.AddDataSeries(ds3)
+			xlsx := "_Adoption.xlsx"
+			err = statictimeseries.WriteXLSX(xlsx, dss,
+				timeutil.FormatTimeToString("2006-01"))
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Printf("WROTE [%v]\n", xlsx)
+		}
+
+		ds1.Pop()
+		ds2.Pop()
+		ds3.Pop()
+
+		opts := sts2wchart.LineChartOpts{
+			RegressionDegree: 1,
+			QAgoAnnotation:   false,
+			YAgoAnnotation:   false,
+			AgoAnnotationPct: false,
+			Height:           600,
+			AspectRatio:      ratio.RatioAcademy,
+			Interval:         timeutil.Month}
+
+		if 1 == 1 {
+			opts.QAgoAnnotation = true
+			opts.YAgoAnnotation = true
+			opts.AgoAnnotationPct = true
+			graph1, err := sts2wchart.DataSeriesToLineChart(ds1, &opts)
+			if err != nil {
+				log.Fatal(err)
+			}
+			file1 := "_MAA Platform.png"
+			err = wchart.WritePNG(file1, graph1)
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Printf("WROTE [%s]\n", file1)
+
+			graph2, err := sts2wchart.DataSeriesToLineChart(ds2, &opts)
+			if err != nil {
+				log.Fatal(err)
+			}
+			file2 := "_MAA RC Native.png"
+			err = wchart.WritePNG(file2, graph2)
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Printf("WROTE [%s]\n", file2)
+		}
+		if 1 == 1 {
+			opts.QAgoAnnotation = false
+			opts.YAgoAnnotation = false
+			opts.AgoAnnotationPct = false
+			graph3, err := sts2wchart.DataSeriesToLineChart(ds3, &opts)
+			if err != nil {
+				log.Fatal(err)
+			}
+			file3 := "_MAA Adoption Rate.png"
+			err = wchart.WritePNG(file3, graph3)
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Printf("WROTE [%s]\n", file3)
+		}
+
+		panic("ZZ")
+	}
+
 	googHTTPClient, err := google.NewClientFileStoreWithDefaultsCliEnv("", "")
 	if err != nil {
 		log.Fatal(err)
@@ -64,14 +161,15 @@ func main() {
 		log.Fatal(err)
 	}
 
-	kpis := []uint64{100}
+	kpis := []uint64{158, 159}
 
 	for _, kpiID := range kpis {
 		opts := charts.KpiSlideOpts{
-			KpiID:        kpiID,
-			ImageBaseURL: imageBaseURL,
-			Reference:    fmt.Sprintf("Source: Metabase &\nSimpleKPI #%d", kpiID),
-			Verbose:      true}
+			KpiID:          kpiID,
+			ImageBaseURL:   imageBaseURL,
+			Reference:      fmt.Sprintf("Source: Metabase &\nSimpleKPI #%d", kpiID),
+			SlideBuildExec: true,
+			Verbose:        true}
 
 		opts = charts.KpiSlideOptsDefaultify(opts)
 		opts = charts.KpiSlideOptsSize2Col(opts)

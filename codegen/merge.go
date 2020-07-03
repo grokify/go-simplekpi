@@ -11,46 +11,6 @@ import (
 	"github.com/jessevdk/go-flags"
 )
 
-/*
-type options struct {
-	Version int `short:"v" long:"version" description:"OAS Version" required:"true"`
-}
-
-
-func MergeOAS2(dir, outfile string) error {
-	spec, err := swagger2.MergeDirectory(dir)
-	if err != nil {
-		return errors.Wrap(err, "E_MERGE_FAILED")
-	}
-
-	err = ioutilmore.WriteFileJSON(outfile, spec, 0644, "", "  ")
-	if err != nil {
-		return errors.Wrap(err, "E_WRITE_FAILED")
-	}
-	fmt.Printf("WROTE [%v]\n", outfile)
-	return nil
-}
-
-func MergeOAS3(dir, outfile string) error {
-	spec, err := openapi3.MergeDirectory(dir)
-	if err != nil {
-		return errors.Wrap(err, "E_MERGE_FAILED")
-	}
-
-	bytes, err := spec.MarshalJSON()
-	if err != nil {
-		return errors.Wrap(err, "E_JSON_ENCODING_FAILED")
-	}
-
-	err = ioutil.WriteFile(outfile, bytes, 0644)
-	if err != nil {
-		return errors.Wrap(err, "E_WRITE_FAILED")
-	}
-	fmt.Printf("WROTE [%v]\n", outfile)
-	return nil
-}
-*/
-
 type options struct {
 	Directory string `short:"d" long:"directory" description:"OAS Directory" required:"true"`
 	Version   int    `short:"v" long:"version" description:"OAS Version" required:"true"`
@@ -85,7 +45,7 @@ func main() {
 		err = swagger2.WriteFileDirMerge(outfile, dir, 0644)
 	case 3:
 		//err = MergeOAS3(dir, outfile)
-		err = openapi3.WriteFileDirMerge(outfile, dir, 0644)
+		err = openapi3.WriteFileDirMerge(outfile, dir, 0644, nil)
 	}
 	if err != nil {
 		log.Fatal(err)

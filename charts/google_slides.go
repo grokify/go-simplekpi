@@ -9,6 +9,7 @@ import (
 	"github.com/grokify/gocharts/charts/wchart"
 	"github.com/grokify/gocharts/charts/wchart/sts2wchart"
 	"github.com/grokify/gocharts/data/statictimeseries"
+	"github.com/grokify/gocharts/data/statictimeseries/interval"
 	"github.com/grokify/googleutil/slidesutil/v1"
 	"github.com/grokify/gotilla/fmt/fmtutil"
 	"github.com/grokify/gotilla/math/ratio"
@@ -103,7 +104,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 			return dt.Format(DefaultXAxisTimeFormat)
 		}
 	}
-	graph := sts2wchart.DataSeriesToLineChart(ds, sts2wchart.LineChartOpts{
+	graph, err := sts2wchart.DataSeriesToLineChart(ds, &sts2wchart.LineChartOpts{
 		TitleSuffixCurrentValue:     true,
 		TitleSuffixCurrentValueFunc: opts.ValueToString,
 		TitleSuffixCurrentDateFunc: func(dt time.Time) string {
@@ -127,8 +128,11 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 		YAgoAnnotation:   true,
 		AgoAnnotationPct: true,
 		YAxisLeft:        true,
-		YAxisTickFunc:    opts.XAxisTimeToString,
+		XAxisTickFunc:    opts.XAxisTimeToString,
 	})
+	if err != nil {
+		return err
+	}
 
 	localChartFilename := fmt.Sprintf("_output_line_%d.png", opts.KpiID)
 	err = wchart.WritePNG(localChartFilename, graph)
@@ -158,7 +162,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 
 func getXoxString(ds statictimeseries.DataSeries, kpiID uint64, kpiTypeAbbr, sourceString string, fmtValue func(int64) string, verbose bool) (string, error) {
 	xoxString := ""
-	xox, err := statictimeseries.NewXoXDataSeries(ds)
+	xox, err := interval.NewXoXDataSeries(ds)
 	if err != nil {
 		return "", err
 	}
