@@ -68,10 +68,10 @@ func KpiSlideOptsSize2Col(opts KpiSlideOpts) KpiSlideOpts {
 	return opts
 }
 
-func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCreator, opts KpiSlideOpts) error {
+func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCreator, opts KpiSlideOpts) (statictimeseries.DataSeries, error) {
 	ds, err := GetKpiAsDataSeries(skClient, opts.KpiID, timeutil.TimeZeroRFC3339(), time.Now())
 	if err != nil {
-		return err
+		return ds, err
 	}
 	if opts.Verbose {
 		fmtutil.PrintJSON(ds)
@@ -131,13 +131,13 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 		XAxisTickFunc:    opts.XAxisTimeToString,
 	})
 	if err != nil {
-		return err
+		return ds, err
 	}
 
 	localChartFilename := fmt.Sprintf("_output_line_%d.png", opts.KpiID)
 	err = wchart.WritePNG(localChartFilename, graph)
 	if err != nil {
-		return err
+		return ds, err
 	}
 	fmt.Printf("WROTE [%s]\n", localChartFilename)
 
@@ -153,11 +153,11 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 
 			err = pc.CreateSlideImageSidebarRight(ds.SeriesName, "", imageURL, xoxString)
 			if err != nil {
-				return err
+				return ds, err
 			}
 		}
 	}
-	return nil
+	return ds, nil
 }
 
 func getXoxString(ds statictimeseries.DataSeries, kpiID uint64, kpiTypeAbbr, sourceString string, fmtValue func(int64) string, verbose bool) (string, error) {
