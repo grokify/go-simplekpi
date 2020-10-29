@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/grokify/go-simplekpi/charts"
+	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/go-simplekpi/simplekpiutil"
 	"github.com/grokify/gocharts/charts/wchart"
 	"github.com/grokify/gocharts/charts/wchart/sts2wchart"
@@ -15,6 +16,7 @@ import (
 	"github.com/grokify/gotilla/config"
 	"github.com/grokify/gotilla/fmt/fmtutil"
 	"github.com/grokify/gotilla/math/ratio"
+	"github.com/grokify/gotilla/strconv/strconvutil"
 	"github.com/grokify/gotilla/time/timeutil"
 	"github.com/grokify/oauth2more/google"
 	"github.com/jessevdk/go-flags"
@@ -26,6 +28,26 @@ type Options struct {
 	Username string `short:"u" long:"username" description:"Your username" required:"false"`
 	Password string `short:"p" long:"password" description:"Your password" required:"false"`
 	Kpiid    int32  `short:"k" long:"kpiid" description:"KPI ID" required:"false"`
+}
+
+func BuildSingleImages(skAPIClient *simplekpi.APIClient, imageBaseURL string, kpis []uint64) error {
+	for _, kpiID := range kpis {
+		opts := charts.KpiSlideOpts{
+			KpiID: kpiID,
+			Title: "Active MRR",
+			ValueToString: func(v int64) string {
+				return "$" + strconvutil.Commify(v)
+			},
+			KpiTypeAbbr:  "MRR",
+			ImageBaseURL: imageBaseURL,
+			Reference:    fmt.Sprintf("Source: SimpleKPI #%d", kpiID),
+			Verbose:      true}
+		_, err := charts.CreateKPISlide(skAPIClient, nil, opts)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func main() {
@@ -52,7 +74,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if 1 == 1 {
+	err1 := BuildSingleImages(skAPIClient, imageBaseURL, []uint64{157})
+	if err1 != nil {
+		log.Fatal(err1)
+	}
+	panic("Z")
+
+	if 1 == 0 {
 		//t0 := timeutil.TimeZeroRFC3339()
 		t0, err := time.Parse(timeutil.RFC3339FullDate, "2017-01-01")
 		if err != nil {
@@ -174,7 +202,7 @@ func main() {
 		opts = charts.KpiSlideOptsDefaultify(opts)
 		opts = charts.KpiSlideOptsSize2Col(opts)
 
-		err = charts.CreateKPISlide(skAPIClient, pc, opts)
+		_, err = charts.CreateKPISlide(skAPIClient, pc, opts)
 		if err != nil {
 			log.Fatal(err)
 		}
