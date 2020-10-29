@@ -148,7 +148,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 
 			xoxString, err := getXoxString(ds, opts.KpiID, opts.KpiTypeAbbr, opts.Reference, opts.ValueToString, opts.Verbose)
 			if err != nil {
-				return err
+				return ds, err
 			}
 
 			err = pc.CreateSlideImageSidebarRight(ds.SeriesName, "", imageURL, xoxString)

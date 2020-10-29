@@ -25,7 +25,7 @@ func (set *SlidesInfoSet) Inflate() {
 func CreateKPISlides(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCreator, set SlidesInfoSet) error {
 	set.Inflate()
 	for _, opts := range set.KpiSlideOptsList {
-		err := CreateKPISlide(skClient, pc, opts)
+		_, err := CreateKPISlide(skClient, pc, opts)
 		if err != nil {
 			return err
 		}
