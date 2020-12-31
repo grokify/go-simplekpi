@@ -13,12 +13,12 @@ import (
 	"github.com/grokify/gocharts/charts/wchart/sts2wchart"
 	"github.com/grokify/gocharts/data/statictimeseries"
 	"github.com/grokify/googleutil/slidesutil/v1"
-	"github.com/grokify/gotilla/config"
-	"github.com/grokify/gotilla/fmt/fmtutil"
-	"github.com/grokify/gotilla/math/ratio"
-	"github.com/grokify/gotilla/strconv/strconvutil"
-	"github.com/grokify/gotilla/time/timeutil"
 	"github.com/grokify/oauth2more/google"
+	"github.com/grokify/simplego/config"
+	"github.com/grokify/simplego/fmt/fmtutil"
+	"github.com/grokify/simplego/math/ratio"
+	"github.com/grokify/simplego/strconv/strconvutil"
+	"github.com/grokify/simplego/time/timeutil"
 	"github.com/jessevdk/go-flags"
 )
 

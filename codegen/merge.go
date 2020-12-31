@@ -5,7 +5,7 @@ import (
 	"log"
 	"path/filepath"
 
-	"github.com/grokify/gotilla/path/filepathutil"
+	"github.com/grokify/simplego/path/filepathutil"
 	"github.com/grokify/swaggman/openapi3"
 	"github.com/grokify/swaggman/swagger2"
 	"github.com/jessevdk/go-flags"
