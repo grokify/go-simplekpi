@@ -11,12 +11,12 @@ import (
 	"github.com/grokify/gocharts/data/statictimeseries"
 	"github.com/grokify/gocharts/data/statictimeseries/interval"
 	"github.com/grokify/googleutil/slidesutil/v1"
-	"github.com/grokify/gotilla/fmt/fmtutil"
-	"github.com/grokify/gotilla/math/ratio"
-	"github.com/grokify/gotilla/net/urlutil"
-	"github.com/grokify/gotilla/strconv/strconvutil"
-	"github.com/grokify/gotilla/time/month"
-	"github.com/grokify/gotilla/time/timeutil"
+	"github.com/grokify/simplego/fmt/fmtutil"
+	"github.com/grokify/simplego/math/ratio"
+	"github.com/grokify/simplego/net/urlutil"
+	"github.com/grokify/simplego/strconv/strconvutil"
+	"github.com/grokify/simplego/time/month"
+	"github.com/grokify/simplego/time/timeutil"
 )
 
 const DefaultXAxisTimeFormat = "Jan '06"

@@ -10,7 +10,7 @@ import (
 	"github.com/antihax/optional"
 	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/gocharts/data/statictimeseries"
-	"github.com/grokify/gotilla/time/timeutil"
+	"github.com/grokify/simplego/time/timeutil"
 )
 
 type ClientUtil struct {

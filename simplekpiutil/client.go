@@ -6,9 +6,9 @@ import (
 	"strconv"
 
 	"github.com/grokify/go-simplekpi/simplekpi"
-	"github.com/grokify/gotilla/net/httputilmore"
-	"github.com/grokify/gotilla/time/timeutil"
 	"github.com/grokify/oauth2more"
+	"github.com/grokify/simplego/net/httputilmore"
+	"github.com/grokify/simplego/time/timeutil"
 )
 
 const (
