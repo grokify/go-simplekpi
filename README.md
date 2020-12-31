@@ -5,12 +5,12 @@
 [![Docs][docs-godoc-svg]][docs-godoc-link]
 [![License][license-svg]][license-link]
 
- [build-status-svg]: https://api.travis-ci.org/grokify/go-simplekpi.svg?branch=master
- [build-status-link]: https://travis-ci.org/grokify/go-simplekpi
+ [build-status-svg]: https://github.com/grokify/go-simplekpi/workflows/build/badge.svg
+ [build-status-link]: https://github.com/grokify/go-simplekpi/actions
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-simplekpi
  [goreport-link]: https://goreportcard.com/report/github.com/grokify/go-simplekpi
- [docs-godoc-svg]: https://img.shields.io/badge/docs-godoc-blue.svg
- [docs-godoc-link]: https://godoc.org/github.com/grokify/go-simplekpi
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/go-simplekpi
+ [docs-godoc-link]: https://pkg.go.dev/github.com/grokify/go-simplekpi
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
  [license-link]: https://github.com/grokify/go-simplekpi/blob/master/LICENSE
 
