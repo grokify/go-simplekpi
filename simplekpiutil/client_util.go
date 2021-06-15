@@ -9,7 +9,7 @@ import (
 
 	"github.com/antihax/optional"
 	"github.com/grokify/go-simplekpi/simplekpi"
-	"github.com/grokify/gocharts/data/statictimeseries"
+	"github.com/grokify/gocharts/data/timeseries"
 	"github.com/grokify/simplego/time/timeutil"
 )
 
@@ -49,8 +49,8 @@ func (sku *ClientUtil) GetAllKPIEntries(kpiId uint64, startDate, endDate time.Ti
 	return kpientries, nil
 }
 
-func (sku *ClientUtil) GetKPIEntriesAsDataSeries(kpiId uint64, startDate, endDate time.Time) (statictimeseries.DataSeries, error) {
-	ds := statictimeseries.NewDataSeries()
+func (sku *ClientUtil) GetKPIEntriesAsDataSeries(kpiId uint64, startDate, endDate time.Time) (timeseries.TimeSeries, error) {
+	ds := timeseries.NewTimeSeries()
 	kentries, err := sku.GetAllKPIEntries(kpiId, startDate, endDate)
 	if err != nil {
 		return ds, err
@@ -68,21 +68,21 @@ func (sku *ClientUtil) GetKPIEntriesAsDataSeries(kpiId uint64, startDate, endDat
 	return ds, nil
 }
 
-func DataSeriesAddKPIEntries(ds statictimeseries.DataSeries, kentries ...simplekpi.KpiEntry) (statictimeseries.DataSeries, error) {
+func DataSeriesAddKPIEntries(ds timeseries.TimeSeries, kentries ...simplekpi.KpiEntry) (timeseries.TimeSeries, error) {
 	for _, kentry := range kentries {
 		dt, err := time.Parse(ApiTimeFormat, kentry.EntryDate)
 		if err != nil {
 			return ds, err
 		}
-		ds.AddItem(statictimeseries.DataItem{
+		ds.AddItem(timeseries.TimeItem{
 			Time:  dt,
 			Value: int64(kentry.Actual)})
 	}
 	return ds, nil
 }
 
-func KPIEntriesToDataSeries(kentries []simplekpi.KpiEntry) (statictimeseries.DataSeries, error) {
-	ds := statictimeseries.NewDataSeries()
+func KPIEntriesToDataSeries(kentries []simplekpi.KpiEntry) (timeseries.TimeSeries, error) {
+	ds := timeseries.NewTimeSeries()
 	return DataSeriesAddKPIEntries(ds, kentries...)
 }
 

@@ -7,13 +7,13 @@ import (
 
 	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/go-simplekpi/simplekpiutil"
-	"github.com/grokify/gocharts/data/statictimeseries"
+	"github.com/grokify/gocharts/data/timeseries"
 	"github.com/grokify/simplego/time/timeutil"
 	"github.com/pkg/errors"
 )
 
-func GetKpiAsDataSeries(skApiClient *simplekpi.APIClient, kpiId uint64, startDate, endDate time.Time) (statictimeseries.DataSeries, error) {
-	ds := statictimeseries.NewDataSeries()
+func GetKpiAsDataSeries(skApiClient *simplekpi.APIClient, kpiId uint64, startDate, endDate time.Time) (timeseries.TimeSeries, error) {
+	ds := timeseries.NewTimeSeries()
 	sku := simplekpiutil.ClientUtil{APIClient: skApiClient}
 	kpi, err := sku.GetKPI(kpiId)
 	if err != nil {
@@ -26,7 +26,7 @@ func GetKpiAsDataSeries(skApiClient *simplekpi.APIClient, kpiId uint64, startDat
 	return KpiAndEntriesToDataSeries(kpi, entries)
 }
 
-func KpiAndEntriesToDataSeries(kpi simplekpi.Kpi, entries []simplekpi.KpiEntry) (statictimeseries.DataSeries, error) {
+func KpiAndEntriesToDataSeries(kpi simplekpi.Kpi, entries []simplekpi.KpiEntry) (timeseries.TimeSeries, error) {
 	interval := timeutil.Month
 	if strings.ToUpper(strings.TrimSpace(kpi.FrequencyId)) == "Q" {
 		interval = timeutil.Quarter
@@ -38,8 +38,8 @@ func KpiAndEntriesToDataSeries(kpi simplekpi.Kpi, entries []simplekpi.KpiEntry) 
 
 // KpiEntriesToDataSeries converets a slice of KpiEntry to
 // `statictimeseris.DataSeries`
-func KpiEntriesToDataSeries(seriesName string, kpiEntries []simplekpi.KpiEntry, interval timeutil.Interval) (statictimeseries.DataSeries, error) {
-	ds := statictimeseries.NewDataSeries()
+func KpiEntriesToDataSeries(seriesName string, kpiEntries []simplekpi.KpiEntry, interval timeutil.Interval) (timeseries.TimeSeries, error) {
+	ds := timeseries.NewTimeSeries()
 	ds.SeriesName = strings.TrimSpace(seriesName)
 	ds.Interval = interval
 	for _, kpie := range kpiEntries {
@@ -53,8 +53,8 @@ func KpiEntriesToDataSeries(seriesName string, kpiEntries []simplekpi.KpiEntry, 
 }
 
 // KpiEntryToDataItem converts a simplekpi.KpiEentry to
-// a statictimeseries.DataItem.
-func KpiEntryToDataItem(seriesName string, entry simplekpi.KpiEntry) (statictimeseries.DataItem, error) {
+// a timeseries.TimeItem.
+func KpiEntryToDataItem(seriesName string, entry simplekpi.KpiEntry) (timeseries.TimeItem, error) {
 	entryDate := strings.TrimSpace(entry.EntryDate)
 	if len(entryDate) == 0 {
 		bytes, err := json.Marshal(entry)
@@ -62,13 +62,13 @@ func KpiEntryToDataItem(seriesName string, entry simplekpi.KpiEntry) (statictime
 		if err == nil {
 			errMsg += " " + string(bytes)
 		}
-		return statictimeseries.DataItem{}, errors.New(errMsg)
+		return timeseries.TimeItem{}, errors.New(errMsg)
 	}
 	dt, err := time.Parse(simplekpiutil.ApiTimeFormat, entryDate)
 	if err != nil {
-		return statictimeseries.DataItem{}, errors.Wrap(err, "KpiEntryToDataItem")
+		return timeseries.TimeItem{}, errors.Wrap(err, "KpiEntryToDataItem")
 	}
-	return statictimeseries.DataItem{
+	return timeseries.TimeItem{
 		SeriesName: strings.TrimSpace(seriesName),
 		Time:       dt,
 		Value:      int64(entry.Actual),

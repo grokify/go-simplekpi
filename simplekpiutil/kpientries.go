@@ -6,7 +6,7 @@ import (
 
 	"github.com/antihax/optional"
 	"github.com/grokify/go-simplekpi/simplekpi"
-	"github.com/grokify/gocharts/data/statictimeseries"
+	"github.com/grokify/gocharts/data/timeseries"
 	"github.com/grokify/simplego/time/timeutil"
 )
 
@@ -36,7 +36,7 @@ func RunQueries(client *simplekpi.APIClient, qrys KpiEntryQueries) []KpiEntryRes
 func UpsertKpiEntriesStaticTimeSeries(
 	client *simplekpi.APIClient,
 	userID, kpiID int64,
-	ds statictimeseries.DataSeries) (KpiEntryQueries, []KpiEntryResponse, error) {
+	ds timeseries.TimeSeries) (KpiEntryQueries, []KpiEntryResponse, error) {
 
 	qrys := KpiEntryQueries{}
 	resps := []KpiEntryResponse{}
@@ -58,7 +58,7 @@ func UpsertKpiEntriesStaticTimeSeriesTimes(
 	client *simplekpi.APIClient,
 	userID, kpiID int64,
 	oldDateFrom, oldDateTo string,
-	ds statictimeseries.DataSeries) (KpiEntryQueries, []KpiEntryResponse, error) {
+	ds timeseries.TimeSeries) (KpiEntryQueries, []KpiEntryResponse, error) {
 
 	qrys := KpiEntryQueries{}
 	resps := []KpiEntryResponse{}
@@ -80,9 +80,9 @@ func UpsertKpiEntriesStaticTimeSeriesTimes(
 }
 
 // GenerateKpiEntryQueriesYMD returns a set of queries given a set
-// of current KPI Entries and a statictimeseries.DataSet containing
+// of current KPI Entries and a timeseries.TimeSeries containing
 // new data.
-func GenerateKpiEntryQueriesYMD(userid, kpiid int64, existing []simplekpi.KpiEntry, new statictimeseries.DataSeries) KpiEntryQueries {
+func GenerateKpiEntryQueriesYMD(userid, kpiid int64, existing []simplekpi.KpiEntry, new timeseries.TimeSeries) KpiEntryQueries {
 	qrys := KpiEntryQueries{
 		Create: []simplekpi.KpiEntry{},
 		Update: []simplekpi.KpiEntry{}}

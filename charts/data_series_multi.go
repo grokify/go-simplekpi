@@ -5,12 +5,12 @@ import (
 
 	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/go-simplekpi/simplekpiutil"
-	"github.com/grokify/gocharts/data/statictimeseries"
+	"github.com/grokify/gocharts/data/timeseries"
 	"github.com/grokify/simplego/errors/errorsutil"
 	"github.com/grokify/simplego/time/timeutil"
 )
 
-func PercentTwoKPIs(skClient *simplekpi.APIClient, numerKpiId1, denomKpiId2 uint64, t0, t1 time.Time) (statictimeseries.DataSeries, statictimeseries.DataSeries, statictimeseries.DataSeries, error) {
+func PercentTwoKPIs(skClient *simplekpi.APIClient, numerKpiId1, denomKpiId2 uint64, t0, t1 time.Time) (timeseries.TimeSeries, timeseries.TimeSeries, timeseries.TimeSeries, error) {
 	cu := simplekpiutil.ClientUtil{
 		APIClient: skClient}
 	if t0.Equal(t1) {
@@ -23,6 +23,6 @@ func PercentTwoKPIs(skClient *simplekpi.APIClient, numerKpiId1, denomKpiId2 uint
 	if err != nil {
 		return ds1, ds2, ds2, err
 	}
-	ds3, err := statictimeseries.DataSeriesDivide(ds1, ds2)
+	ds3, err := timeseries.TimeSeriesDivide(ds1, ds2)
 	return ds1, ds2, ds3, err
 }

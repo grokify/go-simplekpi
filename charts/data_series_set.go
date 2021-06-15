@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/grokify/go-simplekpi/simplekpi"
-	"github.com/grokify/gocharts/data/statictimeseries/interval"
+	"github.com/grokify/gocharts/data/timeseries/interval"
 	"github.com/grokify/simplego/time/timeutil"
 	"github.com/pkg/errors"
 )
@@ -16,14 +16,14 @@ type SimplekpiDataSeriesSet struct {
 	EndTime       time.Time
 	KpiIDs        []int32
 	KpiInfos      map[int32]simplekpi.Kpi
-	DataSeriesSet interval.DataSeriesSet
+	DataSeriesSet interval.TimeSeriesSet
 }
 
 func NewSimplekpiDataSeriesSet(iterval timeutil.Interval, weekStart time.Weekday) SimplekpiDataSeriesSet {
 	return SimplekpiDataSeriesSet{
 		KpiIDs:        []int32{},
 		KpiInfos:      map[int32]simplekpi.Kpi{},
-		DataSeriesSet: interval.NewDataSeriesSet(iterval, weekStart)}
+		DataSeriesSet: interval.NewTimeSeriesSet(iterval, weekStart)}
 }
 
 func (dss *SimplekpiDataSeriesSet) LoadData(client *simplekpi.APIClient) error {

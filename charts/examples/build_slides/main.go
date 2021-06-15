@@ -11,7 +11,7 @@ import (
 	"github.com/grokify/go-simplekpi/simplekpiutil"
 	"github.com/grokify/gocharts/charts/wchart"
 	"github.com/grokify/gocharts/charts/wchart/sts2wchart"
-	"github.com/grokify/gocharts/data/statictimeseries"
+	"github.com/grokify/gocharts/data/timeseries"
 	"github.com/grokify/googleutil/slidesutil/v1"
 	"github.com/grokify/oauth2more/google"
 	"github.com/grokify/simplego/config"
@@ -99,14 +99,16 @@ func main() {
 		fmtutil.PrintJSON(ds3)
 
 		if 1 == 1 {
-			dss := statictimeseries.NewDataSeriesSet()
-			dss.Name = "Adoption"
-			dss.AddDataSeries(ds1)
-			dss.AddDataSeries(ds2)
-			dss.AddDataSeries(ds3)
+			tss := timeseries.NewTimeSeriesSet("")
+			tss.Name = "Adoption"
+			tss.AddTimeSeries(ds1)
+			tss.AddTimeSeries(ds2)
+			tss.AddTimeSeries(ds3)
 			xlsx := "_Adoption.xlsx"
-			err = statictimeseries.WriteXLSX(xlsx, dss,
-				timeutil.FormatTimeToString("2006-01"))
+			err = tss.WriteXLSX(xlsx,
+				&timeseries.TssTableOpts{
+					FuncFormatTime: timeutil.FormatTimeToString("2006-01"),
+				})
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -130,7 +132,7 @@ func main() {
 			opts.QAgoAnnotation = true
 			opts.YAgoAnnotation = true
 			opts.AgoAnnotationPct = true
-			graph1, err := sts2wchart.DataSeriesToLineChart(ds1, &opts)
+			graph1, err := sts2wchart.TimeSeriesToLineChart(ds1, &opts)
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -141,7 +143,7 @@ func main() {
 			}
 			fmt.Printf("WROTE [%s]\n", file1)
 
-			graph2, err := sts2wchart.DataSeriesToLineChart(ds2, &opts)
+			graph2, err := sts2wchart.TimeSeriesToLineChart(ds2, &opts)
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -156,7 +158,7 @@ func main() {
 			opts.QAgoAnnotation = false
 			opts.YAgoAnnotation = false
 			opts.AgoAnnotationPct = false
-			graph3, err := sts2wchart.DataSeriesToLineChart(ds3, &opts)
+			graph3, err := sts2wchart.TimeSeriesToLineChart(ds3, &opts)
 			if err != nil {
 				log.Fatal(err)
 			}

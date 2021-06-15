@@ -8,8 +8,8 @@ import (
 	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/gocharts/charts/wchart"
 	"github.com/grokify/gocharts/charts/wchart/sts2wchart"
-	"github.com/grokify/gocharts/data/statictimeseries"
-	"github.com/grokify/gocharts/data/statictimeseries/interval"
+	"github.com/grokify/gocharts/data/timeseries"
+	"github.com/grokify/gocharts/data/timeseries/interval"
 	"github.com/grokify/googleutil/slidesutil/v1"
 	"github.com/grokify/simplego/fmt/fmtutil"
 	"github.com/grokify/simplego/math/ratio"
@@ -68,7 +68,7 @@ func KpiSlideOptsSize2Col(opts KpiSlideOpts) KpiSlideOpts {
 	return opts
 }
 
-func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCreator, opts KpiSlideOpts) (statictimeseries.DataSeries, error) {
+func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCreator, opts KpiSlideOpts) (timeseries.TimeSeries, error) {
 	ds, err := GetKpiAsDataSeries(skClient, opts.KpiID, timeutil.TimeZeroRFC3339(), time.Now())
 	if err != nil {
 		return ds, err
@@ -104,7 +104,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 			return dt.Format(DefaultXAxisTimeFormat)
 		}
 	}
-	graph, err := sts2wchart.DataSeriesToLineChart(ds, &sts2wchart.LineChartOpts{
+	graph, err := sts2wchart.TimeSeriesToLineChart(ds, &sts2wchart.LineChartOpts{
 		TitleSuffixCurrentValue:     true,
 		TitleSuffixCurrentValueFunc: opts.ValueToString,
 		TitleSuffixCurrentDateFunc: func(dt time.Time) string {
@@ -160,9 +160,9 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 	return ds, nil
 }
 
-func getXoxString(ds statictimeseries.DataSeries, kpiID uint64, kpiTypeAbbr, sourceString string, fmtValue func(int64) string, verbose bool) (string, error) {
+func getXoxString(ds timeseries.TimeSeries, kpiID uint64, kpiTypeAbbr, sourceString string, fmtValue func(int64) string, verbose bool) (string, error) {
 	xoxString := ""
-	xox, err := interval.NewXoXDataSeries(ds)
+	xox, err := interval.NewXoXTimeSeries(ds)
 	if err != nil {
 		return "", err
 	}

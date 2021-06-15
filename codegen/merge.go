@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 
 	"github.com/grokify/simplego/path/filepathutil"
-	"github.com/grokify/swaggman/openapi3"
-	"github.com/grokify/swaggman/swagger2"
+	"github.com/grokify/spectrum/openapi2"
+	"github.com/grokify/spectrum/openapi3"
 	"github.com/jessevdk/go-flags"
 )
 
@@ -42,7 +42,7 @@ func main() {
 	switch version {
 	case 2:
 		//err = MergeOAS2(dir, outfile)
-		err = swagger2.WriteFileDirMerge(outfile, dir, 0644)
+		err = openapi2.WriteFileDirMerge(outfile, dir, 0644)
 	case 3:
 		//err = MergeOAS3(dir, outfile)
 		_, err = openapi3.WriteFileDirMerge(outfile, dir, 0644, nil)

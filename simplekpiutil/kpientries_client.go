@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/grokify/go-simplekpi/simplekpi"
-	"github.com/grokify/gocharts/data/statictimeseries"
+	"github.com/grokify/gocharts/data/timeseries"
 )
 
 type KpiEntriesClient struct {
@@ -30,12 +30,12 @@ func NewKpiEntriesClientEnv() (KpiEntriesClient, error) {
 }
 
 func (kec *KpiEntriesClient) UpsertKpiEntriesDataSeries(kpiID int64,
-	ds statictimeseries.DataSeries) (KpiEntryQueries, []KpiEntryResponse, error) {
+	ds timeseries.TimeSeries) (KpiEntryQueries, []KpiEntryResponse, error) {
 	return UpsertKpiEntriesStaticTimeSeries(kec.ApiClient, kec.UserID, kpiID, ds)
 }
 
 func (kec *KpiEntriesClient) UpsertKpiEntriesDataSeriesSetSimple(name2KpiID map[string]int64,
-	ds3 statictimeseries.DataSeriesSet) ([]KpiEntryQueries, [][]KpiEntryResponse, error) {
+	ds3 timeseries.TimeSeriesSet) ([]KpiEntryQueries, [][]KpiEntryResponse, error) {
 
 	queries := []KpiEntryQueries{}
 	responses := [][]KpiEntryResponse{}
@@ -57,7 +57,7 @@ func (kec *KpiEntriesClient) UpsertKpiEntriesDataSeriesSetSimple(name2KpiID map[
 
 func WriteKpisXlsx(apiClient *simplekpi.APIClient, filename string, kpiIDs []uint64, dateStart, dateEnd time.Time) error {
 	cu := ClientUtil{APIClient: apiClient}
-	data := []statictimeseries.DataSeries{}
+	data := []timeseries.TimeSeries{}
 	for _, kpiID := range kpiIDs {
 		ds, err := cu.GetKPIEntriesAsDataSeries(kpiID, dateStart, dateEnd)
 		if err != nil {
@@ -65,5 +65,5 @@ func WriteKpisXlsx(apiClient *simplekpi.APIClient, filename string, kpiIDs []uin
 		}
 		data = append(data, ds)
 	}
-	return statictimeseries.DataSeriesSliceWriteXLSX(filename, data)
+	return timeseries.TimeSeriesSliceWriteXLSX(filename, data)
 }
