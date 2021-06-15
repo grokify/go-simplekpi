@@ -1,18 +1,18 @@
 # SimpleKPI Client SDK for Go
 
-[![Build Status][build-status-svg]][build-status-link]
-[![Go Report Card][goreport-svg]][goreport-link]
-[![Docs][docs-godoc-svg]][docs-godoc-link]
-[![License][license-svg]][license-link]
+[![Build Status][build-status-svg]][build-status-url]
+[![Go Report Card][goreport-svg]][goreport-url]
+[![Docs][docs-godoc-svg]][docs-godoc-url]
+[![License][license-svg]][license-url]
 
- [build-status-svg]: https://github.com/grokify/go-simplekpi/workflows/build/badge.svg
- [build-status-link]: https://github.com/grokify/go-simplekpi/actions
+ [build-status-svg]: https://github.com/grokify/go-simplekpi/workflows/go%20build/badge.svg
+ [build-status-url]: https://github.com/grokify/go-simplekpi/actions
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-simplekpi
- [goreport-link]: https://goreportcard.com/report/github.com/grokify/go-simplekpi
+ [goreport-url]: https://goreportcard.com/report/github.com/grokify/go-simplekpi
  [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/go-simplekpi
- [docs-godoc-link]: https://pkg.go.dev/github.com/grokify/go-simplekpi
+ [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/go-simplekpi
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-link]: https://github.com/grokify/go-simplekpi/blob/master/LICENSE
+ [license-url]: https://github.com/grokify/go-simplekpi/blob/master/LICENSE
 
 This is a SimpleKPI.com SDK for Go built using OpenAPI Generator.
 
