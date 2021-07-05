@@ -101,12 +101,12 @@ func main() {
 		if 1 == 1 {
 			tss := timeseries.NewTimeSeriesSet("")
 			tss.Name = "Adoption"
-			tss.AddTimeSeries(ds1)
-			tss.AddTimeSeries(ds2)
-			tss.AddTimeSeries(ds3)
+			tss.AddSeries(ds1)
+			tss.AddSeries(ds2)
+			tss.AddSeries(ds3)
 			xlsx := "_Adoption.xlsx"
 			err = tss.WriteXLSX(xlsx,
-				&timeseries.TssTableOpts{
+				&timeseries.TimeSeriesSetTableOpts{
 					FuncFormatTime: timeutil.FormatTimeToString("2006-01"),
 				})
 			if err != nil {

@@ -39,17 +39,17 @@ func KpiAndEntriesToDataSeries(kpi simplekpi.Kpi, entries []simplekpi.KpiEntry) 
 // KpiEntriesToDataSeries converets a slice of KpiEntry to
 // `statictimeseris.DataSeries`
 func KpiEntriesToDataSeries(seriesName string, kpiEntries []simplekpi.KpiEntry, interval timeutil.Interval) (timeseries.TimeSeries, error) {
-	ds := timeseries.NewTimeSeries()
-	ds.SeriesName = strings.TrimSpace(seriesName)
-	ds.Interval = interval
+	ts := timeseries.NewTimeSeries()
+	ts.SeriesName = strings.TrimSpace(seriesName)
+	ts.Interval = interval
 	for _, kpie := range kpiEntries {
-		dataItem, err := KpiEntryToDataItem(ds.SeriesName, kpie)
+		dataItem, err := KpiEntryToDataItem(ts.SeriesName, kpie)
 		if err != nil {
-			return ds, err
+			return ts, err
 		}
-		ds.AddItem(dataItem)
+		ts.AddItems(dataItem)
 	}
-	return ds, nil
+	return ts, nil
 }
 
 // KpiEntryToDataItem converts a simplekpi.KpiEentry to

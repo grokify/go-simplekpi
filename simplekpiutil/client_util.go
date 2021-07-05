@@ -50,35 +50,35 @@ func (sku *ClientUtil) GetAllKPIEntries(kpiId uint64, startDate, endDate time.Ti
 }
 
 func (sku *ClientUtil) GetKPIEntriesAsDataSeries(kpiId uint64, startDate, endDate time.Time) (timeseries.TimeSeries, error) {
-	ds := timeseries.NewTimeSeries()
+	ts := timeseries.NewTimeSeries()
 	kentries, err := sku.GetAllKPIEntries(kpiId, startDate, endDate)
 	if err != nil {
-		return ds, err
+		return ts, err
 	}
 	kpi, err := sku.GetKPI(kpiId)
 	if err != nil {
-		return ds, err
+		return ts, err
 	}
-	ds.SeriesName = kpi.Name
-	ds.Interval = FrequencyIDToInterval(kpi.FrequencyId)
-	ds, err = DataSeriesAddKPIEntries(ds, kentries...)
+	ts.SeriesName = kpi.Name
+	ts.Interval = FrequencyIDToInterval(kpi.FrequencyId)
+	ts, err = DataSeriesAddKPIEntries(ts, kentries...)
 	if err != nil {
-		return ds, err
+		return ts, err
 	}
-	return ds, nil
+	return ts, nil
 }
 
-func DataSeriesAddKPIEntries(ds timeseries.TimeSeries, kentries ...simplekpi.KpiEntry) (timeseries.TimeSeries, error) {
+func DataSeriesAddKPIEntries(ts timeseries.TimeSeries, kentries ...simplekpi.KpiEntry) (timeseries.TimeSeries, error) {
 	for _, kentry := range kentries {
 		dt, err := time.Parse(ApiTimeFormat, kentry.EntryDate)
 		if err != nil {
-			return ds, err
+			return ts, err
 		}
-		ds.AddItem(timeseries.TimeItem{
+		ts.AddItems(timeseries.TimeItem{
 			Time:  dt,
 			Value: int64(kentry.Actual)})
 	}
-	return ds, nil
+	return ts, nil
 }
 
 func KPIEntriesToDataSeries(kentries []simplekpi.KpiEntry) (timeseries.TimeSeries, error) {
