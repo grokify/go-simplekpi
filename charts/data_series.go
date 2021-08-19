@@ -2,6 +2,7 @@ package charts
 
 import (
 	"encoding/json"
+	"strconv"
 	"strings"
 	"time"
 
@@ -13,7 +14,7 @@ import (
 )
 
 func GetKpiAsDataSeries(skApiClient *simplekpi.APIClient, kpiId uint64, startDate, endDate time.Time) (timeseries.TimeSeries, error) {
-	ds := timeseries.NewTimeSeries()
+	ds := timeseries.NewTimeSeries("KPI " + strconv.Itoa(int(kpiId)))
 	sku := simplekpiutil.ClientUtil{APIClient: skApiClient}
 	kpi, err := sku.GetKPI(kpiId)
 	if err != nil {
@@ -39,8 +40,7 @@ func KpiAndEntriesToDataSeries(kpi simplekpi.Kpi, entries []simplekpi.KpiEntry) 
 // KpiEntriesToDataSeries converets a slice of KpiEntry to
 // `statictimeseris.DataSeries`
 func KpiEntriesToDataSeries(seriesName string, kpiEntries []simplekpi.KpiEntry, interval timeutil.Interval) (timeseries.TimeSeries, error) {
-	ts := timeseries.NewTimeSeries()
-	ts.SeriesName = strings.TrimSpace(seriesName)
+	ts := timeseries.NewTimeSeries(strings.TrimSpace(seriesName))
 	ts.Interval = interval
 	for _, kpie := range kpiEntries {
 		dataItem, err := KpiEntryToDataItem(ts.SeriesName, kpie)

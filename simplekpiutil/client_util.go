@@ -50,7 +50,7 @@ func (sku *ClientUtil) GetAllKPIEntries(kpiId uint64, startDate, endDate time.Ti
 }
 
 func (sku *ClientUtil) GetKPIEntriesAsDataSeries(kpiId uint64, startDate, endDate time.Time) (timeseries.TimeSeries, error) {
-	ts := timeseries.NewTimeSeries()
+	ts := timeseries.NewTimeSeries("KPI Entries")
 	kentries, err := sku.GetAllKPIEntries(kpiId, startDate, endDate)
 	if err != nil {
 		return ts, err
@@ -82,7 +82,7 @@ func DataSeriesAddKPIEntries(ts timeseries.TimeSeries, kentries ...simplekpi.Kpi
 }
 
 func KPIEntriesToDataSeries(kentries []simplekpi.KpiEntry) (timeseries.TimeSeries, error) {
-	ds := timeseries.NewTimeSeries()
+	ds := timeseries.NewTimeSeries("KPI Enries")
 	return DataSeriesAddKPIEntries(ds, kentries...)
 }
 
