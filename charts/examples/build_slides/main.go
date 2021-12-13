@@ -14,11 +14,11 @@ import (
 	"github.com/grokify/gocharts/charts/wchart/sts2wchart"
 	"github.com/grokify/gocharts/data/timeseries"
 	"github.com/grokify/googleutil/slidesutil/v1"
-	"github.com/grokify/simplego/config"
-	"github.com/grokify/simplego/fmt/fmtutil"
-	"github.com/grokify/simplego/math/ratio"
-	"github.com/grokify/simplego/strconv/strconvutil"
-	"github.com/grokify/simplego/time/timeutil"
+	"github.com/grokify/mogo/config"
+	"github.com/grokify/mogo/fmt/fmtutil"
+	"github.com/grokify/mogo/math/ratio"
+	"github.com/grokify/mogo/strconv/strconvutil"
+	"github.com/grokify/mogo/time/timeutil"
 	"github.com/jessevdk/go-flags"
 )
 

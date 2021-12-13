@@ -6,8 +6,8 @@ import (
 	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/go-simplekpi/simplekpiutil"
 	"github.com/grokify/gocharts/data/timeseries"
-	"github.com/grokify/simplego/errors/errorsutil"
-	"github.com/grokify/simplego/time/timeutil"
+	"github.com/grokify/mogo/errors/errorsutil"
+	"github.com/grokify/mogo/time/timeutil"
 )
 
 func PercentTwoKPIs(skClient *simplekpi.APIClient, numerKpiId1, denomKpiId2 uint64, t0, t1 time.Time) (timeseries.TimeSeries, timeseries.TimeSeries, timeseries.TimeSeries, error) {

@@ -9,7 +9,7 @@ import (
 	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/go-simplekpi/simplekpiutil"
 	"github.com/grokify/gocharts/data/timeseries"
-	"github.com/grokify/simplego/time/timeutil"
+	"github.com/grokify/mogo/time/timeutil"
 	"github.com/pkg/errors"
 )
 

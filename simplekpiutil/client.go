@@ -7,8 +7,8 @@ import (
 
 	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/goauth"
-	"github.com/grokify/simplego/net/httputilmore"
-	"github.com/grokify/simplego/time/timeutil"
+	"github.com/grokify/mogo/net/httputilmore"
+	"github.com/grokify/mogo/time/timeutil"
 )
 
 const (
