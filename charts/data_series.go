@@ -2,6 +2,7 @@ package charts
 
 import (
 	"encoding/json"
+	"errors"
 	"strconv"
 	"strings"
 	"time"
@@ -9,8 +10,8 @@ import (
 	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/go-simplekpi/simplekpiutil"
 	"github.com/grokify/gocharts/data/timeseries"
+	"github.com/grokify/mogo/errors/errorsutil"
 	"github.com/grokify/mogo/time/timeutil"
-	"github.com/pkg/errors"
 )
 
 func GetKpiAsDataSeries(skApiClient *simplekpi.APIClient, kpiId uint64, startDate, endDate time.Time) (timeseries.TimeSeries, error) {
@@ -66,7 +67,7 @@ func KpiEntryToDataItem(seriesName string, entry simplekpi.KpiEntry) (timeseries
 	}
 	dt, err := time.Parse(simplekpiutil.ApiTimeFormat, entryDate)
 	if err != nil {
-		return timeseries.TimeItem{}, errors.Wrap(err, "KpiEntryToDataItem")
+		return timeseries.TimeItem{}, errorsutil.Wrap(err, "KpiEntryToDataItem")
 	}
 	return timeseries.TimeItem{
 		SeriesName: strings.TrimSpace(seriesName),

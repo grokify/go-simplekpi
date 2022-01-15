@@ -7,8 +7,8 @@ import (
 
 	"github.com/grokify/go-simplekpi/simplekpi"
 	"github.com/grokify/gocharts/data/timeseries/interval"
+	"github.com/grokify/mogo/errors/errorsutil"
 	"github.com/grokify/mogo/time/timeutil"
-	"github.com/pkg/errors"
 )
 
 type SimplekpiDataSeriesSet struct {
@@ -32,7 +32,7 @@ func (dss *SimplekpiDataSeriesSet) LoadData(client *simplekpi.APIClient) error {
 		kpi, resp, err := client.KPIsApi.GetKPI(context.Background(),
 			int64(kpiID))
 		if err != nil {
-			return errors.Wrap(err, funcName)
+			return errorsutil.Wrap(err, funcName)
 		} else if resp.StatusCode >= 300 {
 			return fmt.Errorf("E_SIMPLEKPI_API_RESP [%v]: %s", resp.StatusCode, funcName)
 		}
@@ -42,7 +42,7 @@ func (dss *SimplekpiDataSeriesSet) LoadData(client *simplekpi.APIClient) error {
 		dss.KpiInfos[kpiID] = kpi
 		ds, err := GetKpiAsDataSeries(client, uint64(kpiID), dss.StartTime, dss.EndTime)
 		if err != nil {
-			return errors.Wrap(err, funcName)
+			return errorsutil.Wrap(err, funcName)
 		}
 		dss.DataSeriesSet.SourceSeriesMap[ds.SeriesName] = ds
 	}
