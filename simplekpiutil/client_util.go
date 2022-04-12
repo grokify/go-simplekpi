@@ -9,7 +9,7 @@ import (
 
 	"github.com/antihax/optional"
 	"github.com/grokify/go-simplekpi/simplekpi"
-	"github.com/grokify/gocharts/data/timeseries"
+	"github.com/grokify/gocharts/v2/data/timeseries"
 	"github.com/grokify/mogo/time/timeutil"
 )
 

@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/grokify/go-simplekpi/simplekpi"
-	"github.com/grokify/gocharts/data/timeseries/interval"
+	"github.com/grokify/gocharts/v2/data/timeseries/interval"
 	"github.com/grokify/mogo/errors/errorsutil"
 	"github.com/grokify/mogo/time/timeutil"
 )
