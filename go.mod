@@ -7,7 +7,7 @@ require (
 	github.com/grokify/goauth v0.16.2
 	github.com/grokify/gocharts/v2 v2.8.1
 	github.com/grokify/googleutil v0.1.12
-	github.com/grokify/mogo v0.40.4
+	github.com/grokify/mogo v0.40.5
 	github.com/grokify/spectrum v1.12.5
 	github.com/jessevdk/go-flags v1.5.0
 	golang.org/x/oauth2 v0.0.0-20220822191816-0ebed06d0094
@@ -16,7 +16,7 @@ require (
 require (
 	cloud.google.com/go/compute v1.7.0 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
-	github.com/caarlos0/env/v6 v6.10.0 // indirect
+	github.com/caarlos0/env/v6 v6.10.1 // indirect
 	github.com/getkin/kin-openapi v0.98.0 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
@@ -52,11 +52,11 @@ require (
 	github.com/xuri/excelize/v2 v2.6.1 // indirect
 	github.com/xuri/nfp v0.0.0-20220409054826-5e722a1d9e22 // indirect
 	go.opencensus.io v0.23.0 // indirect
-	golang.org/x/crypto v0.0.0-20220817201139-bc19a97f63c8 // indirect
-	golang.org/x/image v0.0.0-20220722155232-062f8c9fd539 // indirect
-	golang.org/x/net v0.0.0-20220812174116-3211cb980234 // indirect
+	golang.org/x/crypto v0.0.0-20221012134737-56aed061732a // indirect
+	golang.org/x/image v0.0.0-20220902085622-e7cb96979f69 // indirect
+	golang.org/x/net v0.0.0-20221014081412-f15817d10f9b // indirect
 	golang.org/x/sys v0.0.0-20220728004956-3c1f35247d10 // indirect
-	golang.org/x/text v0.3.7 // indirect
+	golang.org/x/text v0.3.8 // indirect
 	gonum.org/v1/gonum v0.12.0 // indirect
 	google.golang.org/api v0.94.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
