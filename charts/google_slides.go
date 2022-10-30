@@ -74,7 +74,10 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 		return ds, err
 	}
 	if opts.Verbose {
-		fmtutil.PrintJSON(ds)
+		err := fmtutil.PrintJSON(ds)
+		if err != nil {
+			return ds, err
+		}
 	}
 	if ds.Interval == timeutil.Month {
 		itemLast, err := ds.Last()
@@ -82,7 +85,10 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 			itemLastMonthStart := timeutil.MonthStart(itemLast.Time)
 			nowMonthStart := timeutil.MonthStart(time.Now())
 			if itemLastMonthStart.Equal(nowMonthStart) {
-				ds.Pop()
+				_, err := ds.Pop()
+				if err != nil {
+					return ds, err
+				}
 			}
 		}
 	} else if ds.Interval == timeutil.Quarter {
@@ -91,7 +97,10 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 			itemLastQtrStart := timeutil.QuarterStart(itemLast.Time)
 			nowQtrStart := timeutil.QuarterStart(time.Now())
 			if itemLastQtrStart.Equal(nowQtrStart) {
-				ds.Pop()
+				_, err := ds.Pop()
+				if err != nil {
+					return ds, err
+				}
 			}
 		}
 	}
@@ -181,8 +190,8 @@ func getXoxString(ds timeseries.TimeSeries, kpiID uint64, kpiTypeAbbr, sourceStr
 	}
 	xoxString = strings.Join(xoxLines, "\n")
 	if verbose {
-		fmtutil.PrintJSON(xox)
-		fmtutil.PrintJSON(xoxLast)
+		fmtutil.MustPrintJSON(xox)
+		fmtutil.MustPrintJSON(xoxLast)
 		fmt.Println(xoxString)
 	}
 	return xoxString, nil
