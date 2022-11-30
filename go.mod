@@ -7,7 +7,7 @@ require (
 	github.com/grokify/goauth v0.16.5
 	github.com/grokify/gocharts/v2 v2.8.4
 	github.com/grokify/googleutil v0.1.15
-	github.com/grokify/mogo v0.41.4
+	github.com/grokify/mogo v0.41.10
 	github.com/grokify/spectrum v1.13.1
 	github.com/jessevdk/go-flags v1.5.0
 	golang.org/x/oauth2 v0.2.0
@@ -56,7 +56,7 @@ require (
 	github.com/xuri/nfp v0.0.0-20220409054826-5e722a1d9e22 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	golang.org/x/crypto v0.3.0 // indirect
-	golang.org/x/exp v0.0.0-20221114191408-850992195362 // indirect
+	golang.org/x/exp v0.0.0-20221126150942-6ab00d035af9 // indirect
 	golang.org/x/image v0.1.0 // indirect
 	golang.org/x/net v0.2.0 // indirect
 	golang.org/x/sys v0.2.0 // indirect
