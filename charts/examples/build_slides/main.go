@@ -60,7 +60,7 @@ func main() {
 	}
 
 	if len(opts.Site) == 0 {
-		_, err := config.LoadDotEnv(".env", os.Getenv("ENV_PATH"), opts.EnvPath)
+		_, err := config.LoadDotEnv([]string{".env", os.Getenv("ENV_PATH"), opts.EnvPath}, 1)
 		if err != nil {
 			log.Fatal(err)
 		}

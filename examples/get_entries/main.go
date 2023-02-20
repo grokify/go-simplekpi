@@ -28,7 +28,7 @@ func main() {
 	}
 
 	if len(opts.Site) == 0 {
-		err := config.LoadDotEnvSkipEmpty(opts.EnvPath, ".env", os.Getenv("ENV_PATH"))
+		_, err := config.LoadDotEnv([]string{opts.EnvPath, ".env", os.Getenv("ENV_PATH")}, 1)
 		if err != nil {
 			log.Fatal(err)
 		}

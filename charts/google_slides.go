@@ -15,7 +15,6 @@ import (
 	"github.com/grokify/mogo/math/ratio"
 	"github.com/grokify/mogo/net/urlutil"
 	"github.com/grokify/mogo/strconv/strconvutil"
-	"github.com/grokify/mogo/time/month"
 	"github.com/grokify/mogo/time/timeutil"
 )
 
@@ -82,8 +81,8 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 	if ds.Interval == timeutil.Month {
 		itemLast, err := ds.Last()
 		if err == nil {
-			itemLastMonthStart := timeutil.MonthStart(itemLast.Time)
-			nowMonthStart := timeutil.MonthStart(time.Now())
+			itemLastMonthStart := timeutil.NewTimeMore(itemLast.Time, 0).MonthStart()
+			nowMonthStart := timeutil.NewTimeMore(time.Now(), 0).MonthStart()
 			if itemLastMonthStart.Equal(nowMonthStart) {
 				_, err := ds.Pop()
 				if err != nil {
@@ -94,8 +93,8 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 	} else if ds.Interval == timeutil.Quarter {
 		itemLast, err := ds.Last()
 		if err == nil {
-			itemLastQtrStart := timeutil.QuarterStart(itemLast.Time)
-			nowQtrStart := timeutil.QuarterStart(time.Now())
+			itemLastQtrStart := timeutil.NewTimeMore(itemLast.Time, 0).QuarterStart()
+			nowQtrStart := timeutil.NewTimeMore(time.Now(), 0).QuarterStart()
 			if itemLastQtrStart.Equal(nowQtrStart) {
 				_, err := ds.Pop()
 				if err != nil {
@@ -124,7 +123,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 				}
 				return timeutil.FormatQuarterYYYYQ(lastQuarter.Time)
 			}
-			monthAgo := month.MonthBegin(dt, 0)
+			monthAgo := timeutil.NewTimeMore(dt, 0).MonthStart()
 			return monthAgo.Format("Jan '06")
 		},
 		Height:           opts.ImageHeight,
