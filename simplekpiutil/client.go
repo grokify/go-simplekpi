@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/grokify/go-simplekpi/simplekpi"
-	"github.com/grokify/goauth"
+	"github.com/grokify/goauth/authutil"
 	"github.com/grokify/mogo/net/http/httputilmore"
 	"github.com/grokify/mogo/time/timeutil"
 )
@@ -23,7 +23,7 @@ const (
 )
 
 func NewApiClient(site, username, token string) (*simplekpi.APIClient, error) {
-	headerVal, err := goauth.BasicAuthHeader(username, token)
+	headerVal, err := authutil.BasicAuthHeader(username, token)
 	if err != nil {
 		return nil, err
 	}
