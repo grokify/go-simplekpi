@@ -8,7 +8,7 @@ require (
 	github.com/grokify/gocharts/v2 v2.9.1
 	github.com/grokify/googleutil v0.1.23
 	github.com/grokify/mogo v0.50.0
-	github.com/grokify/spectrum v1.16.8
+	github.com/grokify/spectrum v1.16.9
 	github.com/jessevdk/go-flags v1.5.0
 	golang.org/x/oauth2 v0.9.0
 )
@@ -18,9 +18,9 @@ require (
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/caarlos0/env/v6 v6.10.1 // indirect
-	github.com/getkin/kin-openapi v0.115.0 // indirect
+	github.com/getkin/kin-openapi v0.118.0 // indirect
 	github.com/go-openapi/jsonpointer v0.19.6 // indirect
-	github.com/go-openapi/swag v0.22.3 // indirect
+	github.com/go-openapi/swag v0.22.4 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
