@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/antihax/optional v1.0.0
-	github.com/grokify/goauth v0.20.1
+	github.com/grokify/goauth v0.20.2
 	github.com/grokify/gocharts/v2 v2.12.0
 	github.com/grokify/googleutil v0.1.24
 	github.com/grokify/mogo v0.55.0
