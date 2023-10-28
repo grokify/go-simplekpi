@@ -5,9 +5,9 @@ go 1.18
 require (
 	github.com/antihax/optional v1.0.0
 	github.com/grokify/goauth v0.20.2
-	github.com/grokify/gocharts/v2 v2.12.0
+	github.com/grokify/gocharts/v2 v2.13.0
 	github.com/grokify/googleutil v0.1.24
-	github.com/grokify/mogo v0.56.0
+	github.com/grokify/mogo v0.57.0
 	github.com/grokify/spectrum v1.16.12
 	github.com/jessevdk/go-flags v1.5.0
 	golang.org/x/oauth2 v0.13.0
@@ -58,7 +58,7 @@ require (
 	go.opencensus.io v0.24.0 // indirect
 	golang.org/x/crypto v0.14.0 // indirect
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d // indirect
-	golang.org/x/image v0.12.0 // indirect
+	golang.org/x/image v0.13.0 // indirect
 	golang.org/x/net v0.17.0 // indirect
 	golang.org/x/sys v0.13.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
