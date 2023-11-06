@@ -7,16 +7,16 @@ go 1.21
 require (
 	github.com/antihax/optional v1.0.0
 	github.com/grokify/goauth v0.20.4
-	github.com/grokify/gocharts/v2 v2.14.1
+	github.com/grokify/gocharts/v2 v2.15.1
 	github.com/grokify/googleutil v0.1.26
-	github.com/grokify/mogo v0.58.0
+	github.com/grokify/mogo v0.60.1
 	github.com/grokify/spectrum v1.17.0
 	github.com/jessevdk/go-flags v1.5.0
 	golang.org/x/oauth2 v0.13.0
 )
 
 require (
-	cloud.google.com/go/compute v1.23.2 // indirect
+	cloud.google.com/go/compute v1.23.3 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/caarlos0/env/v6 v6.10.1 // indirect
@@ -62,12 +62,12 @@ require (
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d // indirect
 	golang.org/x/image v0.13.0 // indirect
 	golang.org/x/net v0.17.0 // indirect
-	golang.org/x/sys v0.13.0 // indirect
-	golang.org/x/text v0.13.0 // indirect
+	golang.org/x/sys v0.14.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
 	gonum.org/v1/gonum v0.14.0 // indirect
-	google.golang.org/api v0.148.0 // indirect
+	google.golang.org/api v0.149.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20231016165738-49dd2c1f3d0b // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20231030173426-d783a09b4405 // indirect
 	google.golang.org/grpc v1.59.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/oleiade/reflections.v1 v1.0.0 // indirect
