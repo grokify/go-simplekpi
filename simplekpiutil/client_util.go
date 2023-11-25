@@ -86,9 +86,9 @@ func KPIEntriesToDataSeries(kentries []simplekpi.KpiEntry) (timeseries.TimeSerie
 func FrequencyIDToInterval(frequencyId string) timeutil.Interval {
 	frequencyId = strings.ToUpper(strings.TrimSpace(frequencyId))
 	if frequencyId == "Q" {
-		return timeutil.Quarter
+		return timeutil.IntervalQuarter
 	} else if frequencyId == "M" {
-		return timeutil.Month
+		return timeutil.IntervalMonth
 	}
-	return timeutil.Day
+	return timeutil.IntervalDay
 }

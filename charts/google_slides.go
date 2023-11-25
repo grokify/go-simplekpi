@@ -78,7 +78,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 			return ds, err
 		}
 	}
-	if ds.Interval == timeutil.Month {
+	if ds.Interval == timeutil.IntervalMonth {
 		itemLast, err := ds.Last()
 		if err == nil {
 			itemLastMonthStart := timeutil.NewTimeMore(itemLast.Time, 0).MonthStart()
@@ -90,7 +90,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 				}
 			}
 		}
-	} else if ds.Interval == timeutil.Quarter {
+	} else if ds.Interval == timeutil.IntervalQuarter {
 		itemLast, err := ds.Last()
 		if err == nil {
 			itemLastQtrStart := timeutil.NewTimeMore(itemLast.Time, 0).QuarterStart()
@@ -116,7 +116,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 		TitleSuffixCurrentValue:     true,
 		TitleSuffixCurrentValueFunc: opts.ValueToString,
 		TitleSuffixCurrentDateFunc: func(dt time.Time) string {
-			if ds.Interval == timeutil.Quarter {
+			if ds.Interval == timeutil.IntervalQuarter {
 				lastQuarter, err := ds.Last()
 				if err != nil {
 					return ""

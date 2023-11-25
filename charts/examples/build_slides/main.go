@@ -126,7 +126,7 @@ func main() {
 			AgoAnnotationPct: false,
 			Height:           600,
 			AspectRatio:      ratio.RatioAcademy,
-			Interval:         timeutil.Month}
+			Interval:         timeutil.IntervalMonth}
 
 		if 1 == 1 {
 			opts.QAgoAnnotation = true

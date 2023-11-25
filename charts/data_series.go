@@ -29,11 +29,11 @@ func GetKpiAsDataSeries(skApiClient *simplekpi.APIClient, kpiId uint64, startDat
 }
 
 func KpiAndEntriesToDataSeries(kpi simplekpi.Kpi, entries []simplekpi.KpiEntry) (timeseries.TimeSeries, error) {
-	interval := timeutil.Month
+	interval := timeutil.IntervalMonth
 	if strings.ToUpper(strings.TrimSpace(kpi.FrequencyId)) == "Q" {
-		interval = timeutil.Quarter
+		interval = timeutil.IntervalQuarter
 	} else if strings.ToUpper(strings.TrimSpace(kpi.FrequencyId)) == "M" {
-		interval = timeutil.Month
+		interval = timeutil.IntervalMonth
 	}
 	return KpiEntriesToDataSeries(kpi.Name, entries, interval)
 }
