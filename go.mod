@@ -9,7 +9,7 @@ require (
 	github.com/grokify/goauth v0.20.5
 	github.com/grokify/gocharts/v2 v2.15.2
 	github.com/grokify/googleutil v0.1.27
-	github.com/grokify/mogo v0.61.0
+	github.com/grokify/mogo v0.61.1
 	github.com/grokify/spectrum v1.17.1
 	github.com/jessevdk/go-flags v1.5.0
 	golang.org/x/oauth2 v0.14.0
