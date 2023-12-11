@@ -6,7 +6,7 @@ go 1.21
 
 require (
 	github.com/antihax/optional v1.0.0
-	github.com/grokify/goauth v0.20.5
+	github.com/grokify/goauth v0.20.6
 	github.com/grokify/gocharts/v2 v2.16.0
 	github.com/grokify/googleutil v0.1.27
 	github.com/grokify/mogo v0.62.2
@@ -22,7 +22,7 @@ require (
 	github.com/getkin/kin-openapi v0.120.0 // indirect
 	github.com/go-openapi/jsonpointer v0.20.0 // indirect
 	github.com/go-openapi/swag v0.22.4 // indirect
-	github.com/golang-jwt/jwt/v5 v5.1.0 // indirect
+	github.com/golang-jwt/jwt/v5 v5.2.0 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
@@ -62,9 +62,9 @@ require (
 	golang.org/x/sys v0.15.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	gonum.org/v1/gonum v0.14.0 // indirect
-	google.golang.org/api v0.151.0 // indirect
+	google.golang.org/api v0.153.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20231120223509-83a465c0220f // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20231127180814-3a041ad873d4 // indirect
 	google.golang.org/grpc v1.59.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
