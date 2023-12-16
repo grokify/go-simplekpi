@@ -8,7 +8,7 @@ require (
 	github.com/antihax/optional v1.0.0
 	github.com/grokify/goauth v0.20.7
 	github.com/grokify/gocharts/v2 v2.16.1
-	github.com/grokify/googleutil v0.1.27
+	github.com/grokify/googleutil v0.1.29
 	github.com/grokify/mogo v0.62.3
 	github.com/grokify/spectrum v1.17.1
 	github.com/jessevdk/go-flags v1.5.0
