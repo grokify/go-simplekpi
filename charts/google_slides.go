@@ -143,7 +143,7 @@ func CreateKPISlide(skClient *simplekpi.APIClient, pc *slidesutil.PresentationCr
 	}
 
 	localChartFilename := fmt.Sprintf("_output_line_%d.png", opts.KpiID)
-	err = wchart.WritePNG(localChartFilename, graph)
+	err = wchart.WritePNGFile(localChartFilename, graph)
 	if err != nil {
 		return ds, err
 	}

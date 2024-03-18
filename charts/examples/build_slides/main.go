@@ -137,7 +137,7 @@ func main() {
 				log.Fatal(err)
 			}
 			file1 := "_MAA Platform.png"
-			err = wchart.WritePNG(file1, graph1)
+			err = wchart.WritePNGFile(file1, graph1)
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -148,7 +148,7 @@ func main() {
 				log.Fatal(err)
 			}
 			file2 := "_MAA RC Native.png"
-			err = wchart.WritePNG(file2, graph2)
+			err = wchart.WritePNGFile(file2, graph2)
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -163,7 +163,7 @@ func main() {
 				log.Fatal(err)
 			}
 			file3 := "_MAA Adoption Rate.png"
-			err = wchart.WritePNG(file3, graph3)
+			err = wchart.WritePNGFile(file3, graph3)
 			if err != nil {
 				log.Fatal(err)
 			}
