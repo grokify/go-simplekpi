@@ -12,7 +12,7 @@ require (
 	github.com/grokify/mogo v0.63.5
 	github.com/grokify/spectrum v1.18.4
 	github.com/jessevdk/go-flags v1.5.0
-	golang.org/x/oauth2 v0.18.0
+	golang.org/x/oauth2 v0.19.0
 )
 
 require (
@@ -78,7 +78,6 @@ require (
 	gonum.org/v1/gonum v0.15.0 // indirect
 	gonum.org/v1/plot v0.14.0 // indirect
 	google.golang.org/api v0.170.0 // indirect
-	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240314234333-6e1732d8331c // indirect
 	google.golang.org/grpc v1.62.1 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
