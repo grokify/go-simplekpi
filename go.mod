@@ -9,7 +9,7 @@ require (
 	github.com/grokify/goauth v0.20.12
 	github.com/grokify/gocharts/v2 v2.18.2
 	github.com/grokify/googleutil v0.2.1
-	github.com/grokify/mogo v0.63.5
+	github.com/grokify/mogo v0.63.8
 	github.com/grokify/spectrum v1.18.4
 	github.com/jessevdk/go-flags v1.5.0
 	golang.org/x/oauth2 v0.19.0
@@ -69,11 +69,11 @@ require (
 	go.opentelemetry.io/otel v1.24.0 // indirect
 	go.opentelemetry.io/otel/metric v1.24.0 // indirect
 	go.opentelemetry.io/otel/trace v1.24.0 // indirect
-	golang.org/x/crypto v0.21.0 // indirect
-	golang.org/x/exp v0.0.0-20240325151524-a685a6edb6d8 // indirect
+	golang.org/x/crypto v0.22.0 // indirect
+	golang.org/x/exp v0.0.0-20240409090435-93d18d7e34b8 // indirect
 	golang.org/x/image v0.15.0 // indirect
-	golang.org/x/net v0.22.0 // indirect
-	golang.org/x/sys v0.18.0 // indirect
+	golang.org/x/net v0.24.0 // indirect
+	golang.org/x/sys v0.19.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	gonum.org/v1/gonum v0.15.0 // indirect
 	gonum.org/v1/plot v0.14.0 // indirect
