@@ -12,11 +12,11 @@ require (
 	github.com/grokify/mogo v0.64.6
 	github.com/grokify/spectrum v1.18.7
 	github.com/jessevdk/go-flags v1.6.1
-	golang.org/x/oauth2 v0.21.0
+	golang.org/x/oauth2 v0.22.0
 )
 
 require (
-	cloud.google.com/go/auth v0.7.1 // indirect
+	cloud.google.com/go/auth v0.7.3 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.3 // indirect
 	cloud.google.com/go/compute/metadata v0.5.0 // indirect
 	git.sr.ht/~sbinet/gg v0.5.0 // indirect
@@ -34,11 +34,10 @@ require (
 	github.com/go-pdf/fpdf v0.9.0 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
-	github.com/golang/protobuf v1.5.4 // indirect
-	github.com/google/s2a-go v0.1.7 // indirect
+	github.com/google/s2a-go v0.1.8 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.3.2 // indirect
-	github.com/googleapis/gax-go/v2 v2.12.5 // indirect
+	github.com/googleapis/gax-go/v2 v2.13.0 // indirect
 	github.com/grokify/base36 v1.0.5 // indirect
 	github.com/huandu/xstrings v1.5.0 // indirect
 	github.com/iancoleman/strcase v0.3.0 // indirect
@@ -48,7 +47,7 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
-	github.com/mattn/go-runewidth v0.0.15 // indirect
+	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
@@ -73,12 +72,12 @@ require (
 	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56 // indirect
 	golang.org/x/image v0.18.0 // indirect
 	golang.org/x/net v0.27.0 // indirect
-	golang.org/x/sys v0.22.0 // indirect
+	golang.org/x/sys v0.23.0 // indirect
 	golang.org/x/text v0.16.0 // indirect
 	gonum.org/v1/gonum v0.15.0 // indirect
 	gonum.org/v1/plot v0.14.0 // indirect
-	google.golang.org/api v0.188.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240711142825-46eb208f015d // indirect
+	google.golang.org/api v0.190.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240730163845-b1a4ccb954bf // indirect
 	google.golang.org/grpc v1.65.0 // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
