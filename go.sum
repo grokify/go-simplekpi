@@ -100,8 +100,8 @@ github.com/grokify/gocharts/v2 v2.19.6 h1:cgYLUcuJGFCO3Yztum6iHRN1Uun5ktyZC7rlSa
 github.com/grokify/gocharts/v2 v2.19.6/go.mod h1:CjHDnrXJPd4agL+DM7ZHW0D2pUMLEeiy4sQhA7Sf6yo=
 github.com/grokify/googleutil v0.2.6 h1:GwmV+u81GFalhv0q5TjDtuJd2LsqsSPY2LoADLDXwTo=
 github.com/grokify/googleutil v0.2.6/go.mod h1:BYKBB0P581MRnRpaKfpm1oPq7roJhTs8ix1niYj0YQM=
-github.com/grokify/mogo v0.64.7 h1:J8m0hDM5/27FqOTInisVcTTJL4lIMKxa5L/z05tctRg=
-github.com/grokify/mogo v0.64.7/go.mod h1:mXtVtGE6+pZbXstdqyyqp7B3b7gv3Jy2z9HPBshqMYU=
+github.com/grokify/mogo v0.64.8 h1:Oi7X6EWIaBVPLirrP8DAAMcTgQzUHBqag36yjBzMwTU=
+github.com/grokify/mogo v0.64.8/go.mod h1:qD4Zz/GTGquZ7prO4A7h3kT7ZntMshXLk1lXdviKkUI=
 github.com/grokify/spectrum v1.18.7 h1:fgIbebNdStrUs3c1y9q/9M7w8ccDTe1qk+ezz3Y1V1c=
 github.com/grokify/spectrum v1.18.7/go.mod h1:kCXpy8zpMF+UKcIA+Nw71j0bj8tbEgX2VHkQoDo3ooQ=
 github.com/huandu/xstrings v1.5.0 h1:2ag3IFq9ZDANvthTwTiqSSZLjDc+BedvHPAp5tJy2TI=
@@ -281,7 +281,7 @@ google.golang.org/appengine v1.4.0/go.mod h1:xpcJRLb0r/rnEns0DIKYYv+WjYCduHsrkT7
 google.golang.org/genproto v0.0.0-20180817151627-c66870c02cf8/go.mod h1:JiN7NxoALGmiZfu7CAH4rXhgtRTLTxftemlI0sWmxmc=
 google.golang.org/genproto v0.0.0-20190819201941-24fa4b261c55/go.mod h1:DMBHOl98Agz4BDEuKkezgsaosCRResVns1a3J2ZsMNc=
 google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013/go.mod h1:NbSheEEYHJ7i3ixzK3sjbqSGDJWnxyFXZblF3eUsNvo=
-google.golang.org/genproto v0.0.0-20240808171019-573a1156607a h1:3JVv3Ujh+kGiajpSqHWnbWPuu0nQqMZ3hASNDDF9974=
+google.golang.org/genproto v0.0.0-20240814211410-ddb44dafa142 h1:oLiyxGgE+rt22duwci1+TG7bg2/L1LQsXwfjPlmuJA0=
 google.golang.org/genproto/googleapis/api v0.0.0-20240711142825-46eb208f015d h1:kHjw/5UfflP/L5EbledDrcG4C2597RtymmGRZvHiCuY=
 google.golang.org/genproto/googleapis/api v0.0.0-20240711142825-46eb208f015d/go.mod h1:mw8MG/Qz5wfgYr6VqVCiZcHe/GJEfI+oGGDCohaVgB0=
 google.golang.org/genproto/googleapis/rpc v0.0.0-20240730163845-b1a4ccb954bf h1:liao9UHurZLtiEwBgT9LMOnKYsHze6eA6w1KQCMVN2Q=
