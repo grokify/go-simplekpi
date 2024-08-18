@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"os"
@@ -173,7 +174,7 @@ func main() {
 		panic("ZZ")
 	}
 
-	googHTTPClient, err := google.NewClientFileStoreWithDefaultsCliEnv("", "")
+	googHTTPClient, err := google.NewClientFileStoreWithDefaultsCliEnv(context.Background(), "", "")
 	if err != nil {
 		log.Fatal(err)
 	}
