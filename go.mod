@@ -24,7 +24,7 @@ require (
 	github.com/caarlos0/env/v6 v6.10.1 // indirect
 	github.com/campoy/embedmd v1.0.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
-	github.com/getkin/kin-openapi v0.127.0 // indirect
+	github.com/getkin/kin-openapi v0.123.0 // indirect
 	github.com/go-fonts/liberation v0.3.3 // indirect
 	github.com/go-latex/latex v0.0.0-20240709081214-31cef3c7570e // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
