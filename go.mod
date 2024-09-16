@@ -7,9 +7,9 @@ toolchain go1.23.0
 require (
 	github.com/antihax/optional v1.0.0
 	github.com/grokify/goauth v0.22.0
-	github.com/grokify/gocharts/v2 v2.20.0
+	github.com/grokify/gocharts/v2 v2.20.1
 	github.com/grokify/googleutil v0.3.1
-	github.com/grokify/mogo v0.64.10
+	github.com/grokify/mogo v0.64.11
 	github.com/grokify/spectrum v1.18.9
 	github.com/jessevdk/go-flags v1.6.1
 	golang.org/x/oauth2 v0.22.0
@@ -68,12 +68,12 @@ require (
 	go.opentelemetry.io/otel v1.29.0 // indirect
 	go.opentelemetry.io/otel/metric v1.29.0 // indirect
 	go.opentelemetry.io/otel/trace v1.29.0 // indirect
-	golang.org/x/crypto v0.26.0 // indirect
-	golang.org/x/exp v0.0.0-20240823005443-9b4947da3948 // indirect
-	golang.org/x/image v0.19.0 // indirect
-	golang.org/x/net v0.28.0 // indirect
-	golang.org/x/sys v0.24.0 // indirect
-	golang.org/x/text v0.17.0 // indirect
+	golang.org/x/crypto v0.27.0 // indirect
+	golang.org/x/exp v0.0.0-20240904232852-e7e105dedf7e // indirect
+	golang.org/x/image v0.20.0 // indirect
+	golang.org/x/net v0.29.0 // indirect
+	golang.org/x/sys v0.25.0 // indirect
+	golang.org/x/text v0.18.0 // indirect
 	gonum.org/v1/gonum v0.15.1 // indirect
 	gonum.org/v1/plot v0.14.0 // indirect
 	google.golang.org/api v0.195.0 // indirect
