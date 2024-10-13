@@ -2,7 +2,7 @@ package charts
 
 import (
 	"github.com/grokify/go-simplekpi/simplekpi"
-	"github.com/grokify/googleutil/slidesutil/v1"
+	"github.com/grokify/gogoogle/slidesutil/v1"
 )
 
 type SlidesInfoSet struct {

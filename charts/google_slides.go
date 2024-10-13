@@ -10,7 +10,7 @@ import (
 	"github.com/grokify/gocharts/v2/charts/wchart/sts2wchart"
 	"github.com/grokify/gocharts/v2/data/timeseries"
 	"github.com/grokify/gocharts/v2/data/timeseries/interval"
-	"github.com/grokify/googleutil/slidesutil/v1"
+	"github.com/grokify/gogoogle/slidesutil/v1"
 	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/grokify/mogo/math/ratio"
 	"github.com/grokify/mogo/net/urlutil"
