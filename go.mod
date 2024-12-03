@@ -4,10 +4,10 @@ go 1.22.7
 
 require (
 	github.com/antihax/optional v1.0.0
-	github.com/grokify/goauth v0.22.4
-	github.com/grokify/gocharts/v2 v2.21.0
+	github.com/grokify/goauth v0.22.5
+	github.com/grokify/gocharts/v2 v2.21.1
 	github.com/grokify/gogoogle v0.4.2
-	github.com/grokify/mogo v0.65.6
+	github.com/grokify/mogo v0.66.0
 	github.com/grokify/spectrum v1.18.10
 	github.com/jessevdk/go-flags v1.6.1
 	golang.org/x/oauth2 v0.24.0
@@ -31,7 +31,7 @@ require (
 	github.com/go-openapi/swag v0.23.0 // indirect
 	github.com/go-pdf/fpdf v0.9.0 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
-	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
+	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/google/s2a-go v0.1.8 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.3.4 // indirect
