@@ -5,8 +5,8 @@
 [![Docs][docs-godoc-svg]][docs-godoc-url]
 [![License][license-svg]][license-url]
 
- [build-status-svg]: https://github.com/grokify/go-simplekpi/workflows/test/badge.svg
- [build-status-url]: https://github.com/grokify/go-simplekpi/actions
+ [build-status-svg]: https://github.com/grokify/go-simplekpi/actions/workflows/ci.yaml/badge.svg?branch=master
+ [build-status-url]: https://github.com/grokify/go-simplekpi/actions/workflows/ci.yaml
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-simplekpi
  [goreport-url]: https://goreportcard.com/report/github.com/grokify/go-simplekpi
  [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/go-simplekpi
