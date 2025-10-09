@@ -12,7 +12,7 @@ require (
 	github.com/grokify/mogo v0.70.16
 	github.com/grokify/spectrum v1.20.2
 	github.com/jessevdk/go-flags v1.6.1
-	golang.org/x/oauth2 v0.30.0
+	golang.org/x/oauth2 v0.32.0
 )
 
 require (
@@ -29,13 +29,10 @@ require (
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/getkin/kin-openapi v0.132.0 // indirect
-	github.com/go-fonts/liberation v0.3.3 // indirect
-	github.com/go-latex/latex v0.0.0-20250304174226-2790903426af // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-openapi/jsonpointer v0.21.2 // indirect
 	github.com/go-openapi/swag v0.23.1 // indirect
-	github.com/go-pdf/fpdf v0.9.0 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/google/s2a-go v0.1.9 // indirect
 	github.com/google/uuid v1.6.0 // indirect
