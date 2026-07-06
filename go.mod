@@ -33,8 +33,7 @@ require (
 	github.com/go-analyze/charts v0.6.0 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
-	github.com/go-openapi/jsonpointer v0.23.2 // indirect
-	github.com/go-openapi/swag/jsonname v0.26.1 // indirect
+	github.com/go-openapi/jsonpointer v0.24.0 // indirect
 	github.com/goccy/go-json v0.10.6 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/google/s2a-go v0.1.9 // indirect
@@ -80,9 +79,9 @@ require (
 	golang.org/x/text v0.38.0 // indirect
 	gonum.org/v1/gonum v0.17.0 // indirect
 	gonum.org/v1/plot v0.17.0 // indirect
-	google.golang.org/api v0.286.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260622175928-b703f567277d // indirect
-	google.golang.org/grpc v1.81.1 // indirect
+	google.golang.org/api v0.287.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260630182238-925bb5da69e7 // indirect
+	google.golang.org/grpc v1.82.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	sigs.k8s.io/yaml v1.6.0 // indirect
