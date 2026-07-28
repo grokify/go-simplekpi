@@ -28,7 +28,7 @@ require (
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/fatih/color v1.19.0 // indirect
 	github.com/felixge/httpsnoop v1.1.0 // indirect
-	github.com/getkin/kin-openapi v0.140.0 // indirect
+	github.com/getkin/kin-openapi v0.144.0 // indirect
 	github.com/go-analyze/bulk v0.1.4 // indirect
 	github.com/go-analyze/charts v0.6.0 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
